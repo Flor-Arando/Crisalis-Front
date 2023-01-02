@@ -25,8 +25,8 @@ import { person } from '../model/person';
       return this.httpClient.get<person>(this.baseURL + `detail/${id}`);
     }
   
-    public savePerson(person: person){
-      return this.httpClient.post(this.baseURL + 'persona/create', person);
+    public save(person: person){
+      return this.httpClient.post(this.baseURL + 'create', person);
     }
 
   

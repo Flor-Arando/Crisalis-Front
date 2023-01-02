@@ -17,6 +17,8 @@ constructor(private httpClient: HttpClient) { }
         const servicios = this.httpClient.get(this.baseURL + "/servicio/list");
         return await lastValueFrom(servicios);
     }
+
+    
             
 }
      
