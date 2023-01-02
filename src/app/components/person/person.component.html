@@ -1,0 +1,47 @@
+<app-menu></app-menu>
+
+<div class="row">
+    
+    <h1>Personas
+    <br>
+        <button class="btn btn-dark" >Agregar</button></h1>
+    
+    <div class="col-lg-2">
+        <h3>
+            Clientes:
+        </h3>
+    </div>
+
+    <div class="col lg 1"></div>
+    <div class="col-lg-11">
+        <table class="table">
+            <tbody>
+                <tr *ngFor="let i of persons">
+                    <td>
+                        <h2>{{i.id}} {{i.firstName}} </h2>
+                    </td>
+                    <td>
+                        <h2>{{i.lastName}}</h2>
+
+                    </td>
+                    <td>
+                        <h2>{{i.dni}}</h2>
+
+                    </td>
+                    
+                    <td >
+                        <button class="btn btn-light">Editar</button>
+                    </td>
+                    <td >
+                        <button class="btn btn-danger">Borrar</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+
+
+<app-footer></app-footer>

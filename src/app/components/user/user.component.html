@@ -1,0 +1,31 @@
+<body>
+    <form class="formulario" #f="ngForm" (ngSubmit)="onLogin()" novalidate>
+        <h1>Crear usuario</h1>
+        <div class="contenedor">
+            <div class="input-contenedor">
+                <i class="fas fa-user icon"></i>
+                <input type="text" id="fullName" name="fullName" placeholder="Apellido y Nombre" [(ngModel)]="fullName" required>
+            </div>
+
+            <div class="input-contenedor">
+                <i class="fas fa-user icon"></i>
+                <input type="text" id="userName" name="userName" placeholder="Nombre de usuario" [(ngModel)]="userName" required>
+            </div>
+
+            <div class="input-contenedor">
+                <i class="fas fa-envelope icon"></i>
+                <input type="text" id="email" name="email" placeholder="Email" [(ngModel)]="email" required>
+            </div>
+
+            <div class="input-contenedor">
+                <i class="fas fa-key icon"></i>
+                <input type="password" id="password" name="password" placeholder="Contraseña" [(ngModel)]="password" required>
+            </div>
+
+            <input type="submit" value="Registrarse" class="button">
+            
+            <p>¿Ya tienes una cuenta? <a class="link" href=""><button class="btn btn-primary"(click)= "login()"> Iniciar sesión</button></a></p>
+
+        </div>
+    </form>
+</body>
