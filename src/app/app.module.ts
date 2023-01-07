@@ -18,20 +18,23 @@ import { CompanyComponent } from './components/company/company.component';
 import { ServicioComponent } from './components/servicio/servicio.component';
 import { ProductComponent } from './components/product/product.component';
 import { OrderComponent } from './components/order/order.component';
-import { ProductServiceTsComponent } from './service/producttt.service.ts/producttt.service.ts.component';
-
-/*const appRoutes:Routes=[
-  {path:'login', component:LoginComponent},
-  {path:'user', component:UserComponent}
-   //''adentro va url del navegador
-
-];*/
+import { AddPersonComponent } from './components/add-person/add-person.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent, //declaramos los componentes para el routing
-    UserComponent, HomeComponent, MenuComponent, FooterComponent, CustomersComponent, PersonComponent, CompanyComponent, ServicioComponent, ProductComponent, OrderComponent, ProductServiceTsComponent
+    UserComponent, 
+    HomeComponent, 
+    MenuComponent, 
+    FooterComponent, 
+    CustomersComponent, 
+    PersonComponent, 
+    CompanyComponent, 
+    ServicioComponent,
+    ProductComponent, 
+    OrderComponent,
+    AddPersonComponent
   ],
   imports: [
     BrowserModule,
@@ -39,6 +42,7 @@ import { ProductServiceTsComponent } from './service/producttt.service.ts/produc
     RouterModule,//.forRoot({}), creamos una constante dentro un array de rutas, declaramos, e importamos routermodule y con forRoot le decimos donde estan las rutas
     HttpClientModule,
     FormsModule
+    
   
   ],
   providers: [

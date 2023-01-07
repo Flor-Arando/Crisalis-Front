@@ -1,5 +1,5 @@
 export class person{
-    id?: number;
+    id?: number ;
     firstName: string;
     lastName: string;
     dni: string;
@@ -10,4 +10,8 @@ export class person{
         this.lastName = lastName;
         this.dni = dni;
     }
+
+
+    
+    
 }

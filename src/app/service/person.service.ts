@@ -14,28 +14,24 @@ import { person } from '../model/person';
   
     
     async listPersons() {
-      const companies = this.httpClient.get(this.baseURL + "/persona/list");
-      return await lastValueFrom(companies);
-  }
-  
-
-    
-
-    public detail(id: number): Observable<person>{
-      return this.httpClient.get<person>(this.baseURL + `detail/${id}`);
+      const person = this.httpClient.get(this.baseURL + "/persona/list");
+      return await lastValueFrom(person);
     }
   
-    public save(person: person){
-      return this.httpClient.post(this.baseURL + 'create', person);
-    }
-
-  
-    public update(id: number, person: person): Observable<any>{
-      return this.httpClient.put<any>(this.baseURL + `update/${id}`, person);
-    }
-  
-    public delete(id: number): Observable<any>{
-      return this.httpClient.delete<any>(this.baseURL + `delete/${id}`);
-    }
+    createPerson(person: object): Observable<object> {
+          return this.httpClient.post(`${this.baseURL}`+'create', person);  
+        }
+        
+        deletePerson(id: number): Observable<any> {  
+          return this.httpClient.delete(`${this.baseURL}/delete/${id}`, { responseType: 'text' });
+        }  
+        
+        getPerson(id: number): Observable<Object> {  
+          return this.httpClient.get(`${this.baseURL}/persona/${id}`);  
+        }  
+        
+        updatePerson(id: number, value: any): Observable<Object> {  
+          return this.httpClient.post(`${this.baseURL}/update/${id}`, value);
+        }
 
   }

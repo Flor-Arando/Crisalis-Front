@@ -18,6 +18,7 @@ export class PersonComponent implements OnInit {
     console.log(this.persons);
   }
 
+
   
 
 }
