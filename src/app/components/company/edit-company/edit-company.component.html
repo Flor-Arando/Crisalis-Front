@@ -1,0 +1,29 @@
+<app-menu></app-menu>
+<div class="container" *ngIf="compania">
+    <div class="row">
+        <div>
+            <form (ngSubmit)="onUpdate()" novalidate #f="ngForm">
+                <div class="form-group">
+                    <label for="companyName">Razón social</label>
+                    <input type="text" class="form-control" id="companyName" name="companyName" [(ngModel)]="compania.companyName" required>
+                </div>
+                <br>
+                <div class="form-group">
+                    <label for="startActivity">Inicio de actividades</label>
+                    <input type="date" class="form-control" id="startActivity" name="startActivity" [(ngModel)]="compania.startActivity" required>
+                </div>
+                <br>
+                <div class="form-group">
+                    <label for="cuit">CUIT</label>
+                    <input type="text" class="form-control" id="cuit" name="cuit" [(ngModel)]="compania.cuil" required>
+                </div>
+                <br>
+                <button class="btn btn-primary">
+                    Actualizar
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+<app-footer></app-footer>
+

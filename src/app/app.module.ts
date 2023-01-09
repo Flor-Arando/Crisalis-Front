@@ -19,6 +19,11 @@ import { ServicioComponent } from './components/servicio/servicio.component';
 import { ProductComponent } from './components/product/product.component';
 import { OrderComponent } from './components/order/order.component';
 import { AddPersonComponent } from './components/add-person/add-person.component';
+import { EditPersonComponent } from './components/edit-person/edit-person.component';
+import { EditCompanyComponent } from './components/company/edit-company/edit-company.component';
+import { NewCompanyComponent } from './components/company/new-company/new-company.component';
+import { NewProductComponent } from './components/product/new-product/new-product.component';
+import { EditProductComponent } from './components/product/edit-product/edit-product.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +39,12 @@ import { AddPersonComponent } from './components/add-person/add-person.component
     ServicioComponent,
     ProductComponent, 
     OrderComponent,
-    AddPersonComponent
+    AddPersonComponent,
+    EditPersonComponent,
+    EditCompanyComponent,
+    NewCompanyComponent,
+    NewProductComponent,
+    EditProductComponent
   ],
   imports: [
     BrowserModule,

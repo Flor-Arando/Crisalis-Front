@@ -1,74 +1,33 @@
-<!--<ul class="navbar-nav">  
-    <li class="nav-item ">  
-        <a routerLink="view-student" class="nav-link" class="btn btn-primary active" role="button" >View Student</a>  
-    </li>
-    <li class="nav-item">  
-        <a  routerLink="add-student" class="nav-link" class="btn btn-primary active" role="button" >Add Student</a>  
-    </li>
-</ul>-->
+
 
 <app-menu></app-menu>
-<h3>Alta de Personas</h3>  
-<div class="row">  
-      <div class="col-sm-4"></div>  
-      <div class="col-sm-4" >  
-            <div [hidden]="submitted" style="width: 400px;">  
-                  <form [formGroup]="personsaveform" #saveperson(ngSubmit)="savePerson(savePerson)">  
-                          <div class="form-group">  
-                                  <label for="firstName">Nombre de la persona</label>  
-                                  <input type="text" class="form-control"  formControlName="firstName" data-toggle="tooltip"   
-                                         data-placement="right"  title="Enter Person FirstName">
-                                  
-                    <div class="alert alert-danger" *ngIf = "(PersonFirstName.invalid) && (PersonFirstName.invalid)"   
-                                        style="margin-top: 5px;">  
-                                          <span *ngIf="PersonFirstName.errors.required">Person Name is Required</span>  
-                                            <span *ngIf = "PersonFirstName.errors.minlength">   
-                                                    MinLength Error   
-                                                </span>                     
-                                        </div>  
-                              </div>  
-                    
-                          <div class="form-group">  
-                                  <label for="name">dni</label>  
-                                  <input type="text" class="form-control" formControlName="dni"   
-                                        data-toggle="tooltip"  data-placement="right"  title="Enter Person Dni">  
-                                    
-                    <div class="alert alert-danger" *ngIf = "(PersonDni.invalid) && (PersonDni.invalid)"   
-                                        style="margin-top: 5px;">  
-                                          <span *ngIf="PersonDni.errors.required">Person dni is Required</span>  
-                                            <span *ngIf = "PersonDni.errors.minlength">   
-                                                    Invalid Dni Format   
-                                                </span>                     
-                                        </div>  
-                              </div>  
-                    
-                          <!--<div class="form-group">  
-              <label for="branch">Student Branch</label>  
-                <select class="form-control" formControlName="student_branch" data-toggle="tooltip"   
-                      data-placement="right" title="Select Student Branch">  
-                    <option value="null">--Select Branch--</option>  
-                  <option value="B-Tech">B-Tech</option>  
-                  <option value="BCA">BCA</option>  
-                  <option value="MCA">MCA</option>  
-                  <option value="M-Tech">M-Tech</option>  
-                </select>  
-          </div>-->
-                    
-                          <button type="submit" class="btn btn-success">Submit</button>  
-                      </form>  
-              </div>  
-          </div>  
-      <div class="col-sm-4"></div>  
-</div>  
-<div class="row">  
-      <div class="col-sm-4"></div>  
-      <div class="col-sm-4">  
-              <div [hidden]="!submitted">  
-                     <h4>Person Added SuccessFully!</h4>  
-                     <button (click)="addPersonForm()" class='btn btn-primary'>Add More Person</button>  
-                  </div>
-          </div>  
-      <div class="col-sm-4"></div>  
-</div>  
+
+<div class="container">
+    <div class="row">
+        <div>
+            <form (ngSubmit)="onCreate()" novalidate #f="ngForm">
+                <div class="form-group">
+                    <label for="firstName">Nombre</label>
+                    <input type="text" class="form-control" id="firstName" name="firstName" [(ngModel)]="firstName" required>
+                </div>
+                <br>
+                <div class="form-group">
+                    <label for="lastName">Apellido</label>
+                    <input type="text" class="form-control" id="lastName" name="lastName" [(ngModel)]="lastName" required>
+                </div>
+                <br>
+                <div class="form-group">
+                    <label for="dni">Documento</label>
+                    <input type="text" class="form-control" id="dni" name="dni" [(ngModel)]="dni" required>
+                </div>
+                <br>
+                
+                <button class="btn btn-primary">
+                    Agregar cliente persona
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
 
 <app-footer></app-footer>

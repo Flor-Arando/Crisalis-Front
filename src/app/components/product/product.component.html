@@ -4,7 +4,7 @@
     
     <h1>Productos
     <br>
-        <button class="btn btn-dark" >Agregar</button></h1>
+        <button class="btn btn-dark" routerLink="/new-product" *ngIf="isLogged">Agregar producto</button></h1>
     
     <div class="col-lg-2">
         <h3>
@@ -17,7 +17,7 @@
     <div class="col-lg-11">
         <table class="table">
             <tbody>
-                <tr *ngFor="let i of products">
+                <tr *ngFor="let i of productos">
                     <td>
                         <h2>{{i.id}} {{i.name}} </h2>
                     </td>
@@ -25,6 +25,7 @@
                         <h2>{{i.unitPrice}}</h2>
 
                     </td>
+                    
                     <td>
                         <h2>{{i.warranty}}</h2>
 
@@ -33,10 +34,10 @@
                     
                     
                     <td >
-                        <button class="btn btn-light">Editar</button>
+                        <button class="btn btn-light" routerLink="/edit-product/{{i.id}}">Editar</button>
                     </td>
                     <td >
-                        <button class="btn btn-danger">Borrar</button>
+                        <button class="btn btn-danger" (click)="delete(i.id)">Borrar</button>
                     </td>
 
                 </tr>

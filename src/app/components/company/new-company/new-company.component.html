@@ -1,0 +1,30 @@
+<app-menu></app-menu>
+
+<div class="container">
+    <div class="row">
+        <div>
+            <form (ngSubmit)="onCreate()" novalidate #f="ngForm">
+                <div class="form-group">
+                    <label for="companyName">Razón social</label>
+                    <input type="text" class="form-control" id="companyName" name="companyName" [(ngModel)]="companyName" required>
+                </div>
+                <br>
+                <div class="form-group">
+                    <label for="cuil">Cuit</label>
+                    <input type="text" class="form-control" id="cuil" name="cuil" [(ngModel)]="cuil" required>
+                </div>
+                <br>
+
+                <div class="form-group">
+                    <label for="startActivity">Inicio de actividades</label>
+                    <input type="date" class="form-control" id="startActivity" name="startActivity" [(ngModel)]="startActivity" required>
+                </div>
+                <br>
+                <button class="btn btn-primary">
+                    Agregar skill
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+<app-footer></app-footer>

@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { lastValueFrom } from 'rxjs';
+import { lastValueFrom, Observable } from 'rxjs';
+import { Product } from '../model/product';
 
 
 @Injectable({
@@ -8,14 +9,29 @@ import { lastValueFrom } from 'rxjs';
   })
   
 export class ProductService {
-    baseURL = 'http://localhost:8080'
+    baseURL = 'http://localhost:8080/producto/'
     
     
 constructor(private httpClient: HttpClient) { }
 
-    async listProducts() {
-        const products = this.httpClient.get(this.baseURL + "/producto/list");
-        return await lastValueFrom(products);
-    }
+public list(): Observable<Product[]>{
+    return this.httpClient.get<Product[]>(this.baseURL + 'list');
+  }
+
+  public detail(id: number): Observable<Product>{
+    return this.httpClient.get<Product>(this.baseURL + `detail/${id}`);
+  } 
+
+  public save(company: Product): Observable<any>{
+    return this.httpClient.post<any>(this.baseURL + 'create', company);
+  }
+  
+  public update(id: number, company: Product): Observable<any>{
+    return this.httpClient.put<any>(this.baseURL + `update/${id}`, company);
+  }
+
+  public delete(id: number): Observable<any>{
+    return this.httpClient.delete<any>(this.baseURL + `delete/${id}`);
+  }
             
 }

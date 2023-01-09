@@ -1,39 +1,37 @@
 <app-menu></app-menu>
 
 <div class="row">
-    
     <h1>Personas
-    <br>
-        <button class="btn btn-dark" href="/add-person" >Agregar</button></h1>
-    
-    <div class="col-lg-2">
-        <h3>
-            Clientes:
-        </h3>
-    </div>
+        <br>
+            <button class="btn btn-dark" routerLink="/add-person" *ngIf="isLogged">Nuevo cliente</button></h1>
+        
+        <div class="col-lg-2">
+            <h3>
+                Clientes:
+            </h3>
+        </div>
 
     <div class="col lg 1"></div>
     <div class="col-lg-11">
         <table class="table">
             <tbody>
-                <tr *ngFor="let i of persons">
+                <tr *ngFor="let i of personas">
                     <td>
                         <h2>{{i.id}} {{i.firstName}} </h2>
                     </td>
-                    <td>
+                    <td> 
                         <h2>{{i.lastName}}</h2>
-
                     </td>
                     <td>
-                        <h2>{{i.dni}}</h2>
-
+                        <h2>{{i.dni}} </h2>
                     </td>
-                    
-                    <td >
-                        <button class="btn btn-light">Editar</button>
+                    <td *ngIf="isLogged">
+                        <button class="btn btn-light" routerLink="/edit-person/{{i.id}}">
+                            <i class="bi bi-pencil-fill"></i> EDITAR</button>
                     </td>
-                    <td >
-                        <button class="btn btn-danger">Borrar</button>
+                    <td *ngIf="isLogged">
+                        <button class="btn btn-danger" (click)="delete(i.id)">
+                            <i class="bi bi-trash-fill"></i> BORRAR</button>
                     </td>
                 </tr>
             </tbody>

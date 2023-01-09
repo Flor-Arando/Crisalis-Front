@@ -1,0 +1,31 @@
+<app-menu></app-menu>
+
+<div class="container">
+    <div class="row">
+        <div>
+            <form (ngSubmit)="onCreate()" novalidate #f="ngForm">
+                <div class="form-group">
+                    <label for="name">Nombre</label>
+                    <input type="text" class="form-control" id="name" name="name" [(ngModel)]="name" required>
+                </div>
+                <br>
+                <div class="form-group">
+                    <label for="unitPrice">Precio unitario</label>
+                    <input type="text" class="form-control" id="unitPrice" name="unitPrice" [(ngModel)]="unitPrice" required>
+                </div>
+                <br>
+                <div class="form-group">
+                    <label for="warranty">Garantía</label>
+                    <input type="text" class="form-control" id="warranty" name="warranty" [(ngModel)]="warranty" required>
+                </div>
+                <br>
+                
+                <button class="btn btn-primary">
+                    Agregar Producto
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<app-footer></app-footer>

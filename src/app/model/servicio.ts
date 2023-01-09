@@ -1,4 +1,4 @@
-export class servicio{
+export class Servicio{
     id?: number;
     name: string;
     unitPrice: any;
