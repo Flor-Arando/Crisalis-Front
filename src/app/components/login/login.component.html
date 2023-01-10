@@ -1,50 +1,26 @@
 
-<!--<body>
-    <form #f="ngForm" (ngSubmit)="onLogin()" novalidate>
-        <h1>Iniciar sesion</h1>
-        <div class="contenedor">
-
-            <div class="input-contenedor">
-                <i class="fas fa-envelope icon"></i>
-                <input type="email" id="userName" name="userName" [(ngModel)]="userName" required /> 
-                <input type="text" placeholder="Correo electronico">
-                
-            </div>
-
-            <div class="input-contenedor">
-                <i class="fas fa-key icon"></i>
-                <input type="password" placeholder="Contraseña">
-                <input type="password" id="password" name="password" [(ngModel)]="password" required />
-                
-            </div>
-
-            <input type="submit" value="Login" class="button">
-    
-            <p>No tenes una cuenta?<a class="link" href="/user"><button type="button" class="btn btn-primary"(click)= "user()">Registrarse</button>" </a></p>
-
-        </div>
-    </form>
-</body>-->
-
 <body>
     <form class="formulario" #f="ngForm" (ngSubmit)="onLogin()" novalidate>
+        <br>
         <h1>Iniciar Sesión</h1>
+        <br>
         <div class="contenedor">
 
             <div class="input-contenedor">
                 <i class="fas fa-user icon"></i>
                 <input type="text" id="userName" name="userName" placeholder="Nombre de usuario" [(ngModel)]="userName" required/>
             </div>
-
+            <br>
             <div class="input-contenedor">
                 <i class="fas fa-key icon"></i>
                 <input type="password" id="password" name="password" placeholder="Contraseña" [(ngModel)]="password" required />
             </div>
-
-            <input type="submit" value="Ingresar" class="button" (click)="signup()">
-            
-            <!--<p>¿No tienes una cuenta? <a class="link" (click)="signup()"> Registrate</a></p>-->
-            <p>¿No tienes una cuenta? <a class="link" href="/user"><button class="btn btn-primary"(click)= "onLogin()"> Registrarse</button></a></p>
+            <br>
+            <input type="submit" value="Ingresar" class="button">
+            <br>
+            <br>
+        
+            <p>¿No tienes una cuenta? <a class="link" href="/user"><button class="btn btn-primary"(click)= "register()"> Registrarse</button></a></p>
 
         </div>
     </form>

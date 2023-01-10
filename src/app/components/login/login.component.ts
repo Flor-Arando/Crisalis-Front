@@ -58,7 +58,4 @@ export class LoginComponent implements OnInit {
     this.router.navigate(['/user']);
   } //esto redirecciona al formulario para crear el usuario
 
-  signup() {
-    //this.router.navigate(['/customers']);
-  } 
 }

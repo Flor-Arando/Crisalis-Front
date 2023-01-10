@@ -11,8 +11,11 @@ import { LoginComponent } from './components/login/login.component';
 import { MenuComponent } from './components/menu/menu.component';
 import { OrderComponent } from './components/order/order.component';
 import { PersonComponent } from './components/person/person.component';
+import { EditProductComponent } from './components/product/edit-product/edit-product.component';
 import { NewProductComponent } from './components/product/new-product/new-product.component';
 import { ProductComponent } from './components/product/product.component';
+import { EditServiciosComponent } from './components/servicio/edit-servicios/edit-servicios.component';
+import { NewServicioComponent } from './components/servicio/new-servicio/new-servicio.component';
 import { ServicioComponent } from './components/servicio/servicio.component';
 import { UserComponent } from './components/user/user.component';
 
@@ -34,7 +37,9 @@ const routes: Routes = [
   { path: 'edit-company/:id', component: EditCompanyComponent },
   { path: 'new-company', component: NewCompanyComponent },
   { path: 'new-product', component: NewProductComponent },
-  { path: 'edit-product/:id', component: NewProductComponent }
+  { path: 'edit-product/:id', component: EditProductComponent },
+  { path: 'new-servicio', component: NewServicioComponent },
+  { path: 'edit-servicios/:id', component: EditServiciosComponent }
 ];
 
 @NgModule({

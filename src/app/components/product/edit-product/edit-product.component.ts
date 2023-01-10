@@ -9,7 +9,6 @@ import { ProductService } from 'src/app/service/product.service';
   styleUrls: ['./edit-product.component.css']
 })
 export class EditProductComponent implements OnInit {
-
   producto: Product = null;
 
   constructor(private productService: ProductService, private activatedRouter: ActivatedRoute, private router: Router) { }

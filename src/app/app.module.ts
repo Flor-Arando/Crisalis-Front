@@ -24,6 +24,9 @@ import { EditCompanyComponent } from './components/company/edit-company/edit-com
 import { NewCompanyComponent } from './components/company/new-company/new-company.component';
 import { NewProductComponent } from './components/product/new-product/new-product.component';
 import { EditProductComponent } from './components/product/edit-product/edit-product.component';
+import { EditServicioComponent } from './servicio/edit-servicio/edit-servicio.component';
+import { EditServiciosComponent } from './components/servicio/edit-servicios/edit-servicios.component';
+import { NewServicioComponent } from './components/servicio/new-servicio/new-servicio.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +47,10 @@ import { EditProductComponent } from './components/product/edit-product/edit-pro
     EditCompanyComponent,
     NewCompanyComponent,
     NewProductComponent,
-    EditProductComponent
+    EditProductComponent,
+    EditServicioComponent,
+    EditServiciosComponent,
+    NewServicioComponent
   ],
   imports: [
     BrowserModule,
