@@ -39,25 +39,5 @@ import { Company } from '../model/company';
     }
     
         
-    }
-     
-      
-
-
-    /*public detail(id: number): Observable<company>{
-        return this.httpClient.get<company>(this.baseURL + `detail/${id}`);
-      }
-    
-      public save(company: company): Observable<any>{
-        return this.httpClient.post<any>(this.baseURL + 'create', company);
-      }
-    
-      public update(id: number, company: company): Observable<any>{
-        return this.httpClient.put<any>(this.baseURL + `update/${id}`, company);
-      }
-    
-      public delete(id: number): Observable<any>{
-        return this.httpClient.delete<any>(this.baseURL + `delete/${id}`);
-      }*/
-  
+  }
     
