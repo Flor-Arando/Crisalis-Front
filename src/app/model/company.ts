@@ -1,14 +1,14 @@
 export class Company{
     id?: number;
     companyName: string;
-    cuil: number;
+    cuit: number;
     activityStart: Date;
     
 
-    constructor(companyName: string, cuil: number, startActivity: Date){
+    constructor(companyName: string, cuit: number, startActivity: Date){
         
         this.companyName = companyName;
-        this.cuil = cuil;
+        this.cuit = cuit;
         this.activityStart = startActivity;
     }
 }

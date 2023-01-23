@@ -1,1 +1,49 @@
-<p>order works!</p>
+<app-menu></app-menu>
+
+<div class="row">
+    <h1>Pedidos
+        <br>
+            <button class="btn btn-dark" routerLink="/new-order" *ngIf="isLogged">Agregar</button></h1>
+        
+        <div class="col-lg-2">
+            <h3>
+                Pedidos:
+            </h3>
+        </div>
+
+    <div class="col lg 1"></div>
+    <div class="col-lg-12">
+        <table class="table">
+            <tbody>
+                <tr *ngFor="let i of orders">
+                    <td>
+                        <h2>{{i.id}} {{i.idPerson}} </h2>
+                    </td>
+                    <td>
+                        <h2>{{i.id}} {{i.idCompany}} </h2>
+                    </td>
+                   <!-- <td>
+                        <h2>{{i.id}} {{i.product}} </h2>
+                    </td>
+                    <td>
+                        <h2>{{i.id}} {{i.service}} </h2>
+                    </td>-->
+                    
+                    <td *ngIf="isLogged">
+                        <button class="btn btn-light" routerLink="/edit-order/{{i.id}}">
+                            <i class="bi bi-pencil-fill"></i> Editar</button>
+                    </td>
+                    <td *ngIf="isLogged">
+                        <button class="btn btn-danger" (click)="delete(i.id)">
+                            <i class="bi bi-trash-fill"></i> Borrar</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+
+
+<app-footer></app-footer>

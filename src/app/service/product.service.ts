@@ -22,12 +22,12 @@ public list(): Observable<Product[]>{
     return this.httpClient.get<Product>(this.baseURL + `detail/${id}`);
   } 
 
-  public save(company: Product): Observable<any>{
-    return this.httpClient.post<any>(this.baseURL + 'create', company);
+  public save(product: Product): Observable<any>{
+    return this.httpClient.post<any>(this.baseURL + 'create', product);
   }
   
-  public update(id: number, company: Product): Observable<any>{
-    return this.httpClient.put<any>(this.baseURL + `update/${id}`, company);
+  public update(id: number, product: Product): Observable<any>{
+    return this.httpClient.put<any>(this.baseURL + `update/${id}`, product);
   }
 
   public delete(id: number): Observable<any>{

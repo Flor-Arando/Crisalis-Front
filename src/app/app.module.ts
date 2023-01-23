@@ -28,6 +28,8 @@ import { EditServicioComponent } from './servicio/edit-servicio/edit-servicio.co
 import { EditServiciosComponent } from './components/servicio/edit-servicios/edit-servicios.component';
 import { NewServicioComponent } from './components/servicio/new-servicio/new-servicio.component';
 
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -50,7 +52,9 @@ import { NewServicioComponent } from './components/servicio/new-servicio/new-ser
     EditProductComponent,
     EditServicioComponent,
     EditServiciosComponent,
-    NewServicioComponent
+    NewServicioComponent,
+
+    
   ],
   imports: [
     BrowserModule,

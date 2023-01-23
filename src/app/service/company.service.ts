@@ -9,14 +9,8 @@ import { Company } from '../model/company';
   })
   export class CompanyService {
     baseURL = 'http://localhost:8080/empresa/'
-  //cargarcompanies: any;
     
     constructor(private httpClient: HttpClient) { }
-
-    /*async listCompanies() {
-        const companies = this.httpClient.get(this.baseURL + "/empresa/list");
-        return await lastValueFrom(companies);
-    }*/
 
     public list(): Observable<Company[]>{
       return this.httpClient.get<Company[]>(this.baseURL + 'list');

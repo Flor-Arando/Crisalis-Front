@@ -15,13 +15,6 @@ export class CompanyComponent implements OnInit {
   constructor(private companyService: CompanyService, private tokenService: TokenService) { }
 
   isLogged = false
-  
-  /*async ngOnInit() {
-   
-    this.companies = await this.companyService.listCompanies();
-    console.log(this.companies);
-
-}*/
 
 ngOnInit(): void {
   this.cargarCompany();

@@ -10,8 +10,8 @@ import { CompanyService } from 'src/app/service/company.service';
 })
 export class NewCompanyComponent implements OnInit {
   companyName: string;
-  startActivity: Date;
-  cuil: number;
+  activityStart: Date;
+  cuit: number;
 
   constructor( private companyService: CompanyService, private router: Router ) { }
     
@@ -19,14 +19,14 @@ export class NewCompanyComponent implements OnInit {
     }
   
     onCreate(): void {
-      const companies = new Company(this.companyName, this.cuil, this.startActivity);
+      const companies = new Company(this.companyName, this.cuit, this.activityStart);
       this.companyService.save(companies).subscribe(
         data => {
           alert("Empresa añadida");
-          this.router.navigate(['']);
+          this.router.navigate(['/company']);
         }, err => {
           alert("Falló");
-          this.router.navigate(['']);
+          this.router.navigate(['/company']);
         }
       )
     }

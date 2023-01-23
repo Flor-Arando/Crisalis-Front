@@ -19,14 +19,14 @@ export class NewProductComponent implements OnInit {
     }
   
     onCreate(): void {
-      const productos = new Product(this.name, this.unitPrice, this.warranty);
+      const productos = new Product(this.name, this.unitPrice);
       this.productService.save(productos).subscribe(
         data => {
           alert("Producto añadido");
-          this.router.navigate(['']);
+          this.router.navigate(['/product']);
         }, err => {
           alert("Falló");
-          this.router.navigate(['']);
+          this.router.navigate(['/product']);
         }
       )
     }
