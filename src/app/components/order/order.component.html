@@ -22,12 +22,11 @@
                     <td>
                         <h2>{{i.id}} {{i.idCompany}} </h2>
                     </td>
-                   <!-- <td>
-                        <h2>{{i.id}} {{i.product}} </h2>
-                    </td>
+
                     <td>
-                        <h2>{{i.id}} {{i.service}} </h2>
-                    </td>-->
+                        <h2>{{i.id}} {{i.name}} </h2>
+                    </td>
+
                     
                     <td *ngIf="isLogged">
                         <button class="btn btn-light" routerLink="/edit-order/{{i.id}}">
@@ -43,7 +42,5 @@
     </div>
 
 </div>
-
-
 
 <app-footer></app-footer>

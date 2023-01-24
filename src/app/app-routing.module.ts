@@ -39,7 +39,10 @@ const routes: Routes = [
   { path: 'new-product', component: NewProductComponent },
   { path: 'edit-product/:id', component: EditProductComponent },
   { path: 'new-servicio', component: NewServicioComponent },
-  { path: 'edit-servicios/:id', component: EditServiciosComponent }
+  { path: 'edit-servicios/:id', component: EditServiciosComponent },
+  { path: 'edit-order/:id', component: EditServiciosComponent },
+  { path: 'new-order', component: EditServiciosComponent }
+
 ];
 
 @NgModule({
