@@ -1,6 +1,9 @@
 <app-menu></app-menu>
 <div class="container" *ngIf="producto">
     <div class="row">
+        <h1>Modificar producto</h1>
+        <br>
+        <br>
         <div>
             <form (ngSubmit)="onUpdate()" novalidate #f="ngForm">
                 <div class="form-group">

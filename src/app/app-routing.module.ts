@@ -4,7 +4,6 @@ import { AddPersonComponent } from './components/add-person/add-person.component
 import { CompanyComponent } from './components/company/company.component';
 import { EditCompanyComponent } from './components/company/edit-company/edit-company.component';
 import { NewCompanyComponent } from './components/company/new-company/new-company.component';
-import { CustomersComponent } from './components/customers/customers.component';
 import { EditPersonComponent } from './components/edit-person/edit-person.component';
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
@@ -25,7 +24,6 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'user', component: UserComponent },
   { path: 'menu', component: MenuComponent },
-  { path: 'customers', component: CustomersComponent },
   { path: 'home', component: HomeComponent },
   { path: 'person', component: PersonComponent },
   { path: 'company', component: CompanyComponent },

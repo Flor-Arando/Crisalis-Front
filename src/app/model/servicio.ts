@@ -1,13 +1,13 @@
 export class Servicio{
     id?: number;
     name: string;
-    unitPrice: any;
-    support: boolean;
+    price: number;
+    
 
-    constructor(name: string, unitPrice: any, support: boolean){
+    constructor(name: string, price: number, support: boolean){
         
         this.name = name;
-        this.unitPrice = unitPrice;
-        this.support = support;
+        this.price = price;
+       
     }
 }    

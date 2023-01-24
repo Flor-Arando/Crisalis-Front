@@ -20,7 +20,7 @@ export class EditCompanyComponent implements OnInit {
         this.compania = data;
       }, err =>{
         alert("Error al modificar la persona");
-        this.router.navigate(['']);
+        this.router.navigate(['/company']);
       }
     )
   }
@@ -29,10 +29,10 @@ export class EditCompanyComponent implements OnInit {
     const id = this.activatedRouter.snapshot.params['id'];
     this.companyService.update(id, this.compania).subscribe(
       data => {
-        this.router.navigate(['']);
+        this.router.navigate(['/company']);
       }, err =>{
          alert("Error al modificar empresa");
-         this.router.navigate(['']);
+         this.router.navigate(['/company']);
       }
     )
   }

@@ -12,7 +12,6 @@ import { interceptorProvider } from './service/interceptor-service';
 import { HomeComponent } from './components/home/home.component';
 import { MenuComponent } from './components/menu/menu.component';
 import { FooterComponent } from './components/footer/footer.component';
-import { CustomersComponent } from './components/customers/customers.component';
 import { PersonComponent } from './components/person/person.component';
 import { CompanyComponent } from './components/company/company.component';
 import { ServicioComponent } from './components/servicio/servicio.component';
@@ -38,7 +37,6 @@ import { NewServicioComponent } from './components/servicio/new-servicio/new-ser
     HomeComponent, 
     MenuComponent, 
     FooterComponent, 
-    CustomersComponent, 
     PersonComponent, 
     CompanyComponent, 
     ServicioComponent,
