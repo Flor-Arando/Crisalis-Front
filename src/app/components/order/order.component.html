@@ -14,33 +14,44 @@
     <div class="col lg 1"></div>
     <div class="col-lg-12">
         <table class="table">
+            <thead>
+                <th>ORDER NO.</th>
+                <th>COMPANY</th>
+                <th>PRODUCTS</th>
+            </thead>
             <tbody>
-                <tr *ngFor="let i of orders">
+                <tr *ngFor="let order of orders">
                     <td>
-                        <h2>{{i.id}} {{i.idPerson}} </h2>
+                        {{order.id}}
                     </td>
                     <td>
-                        <h2>{{i.id}} {{i.idCompany}} </h2>
+                        {{order.company}}
                     </td>
-
                     <td>
-                        <h2>{{i.id}} {{i.name}} </h2>
+                        <p *ngFor="let product of order.products">
+                            {{ product.name }} x {{ product.quantity }}
+                        </p>
                     </td>
-
-                    
+                    <!--<td>
+                        <h2>{{i.id}} {{i.service}} </h2>
+                    </td>-->
+                    <!--
                     <td *ngIf="isLogged">
-                        <button class="btn btn-light" routerLink="/edit-order/{{i.id}}">
+                        <button class="btn btn-light" routerLink="/edit-order/{{order.id}}">
                             <i class="bi bi-pencil-fill"></i> Editar</button>
                     </td>
                     <td *ngIf="isLogged">
-                        <button class="btn btn-danger" (click)="delete(i.id)">
+                        <button class="btn btn-danger" (click)="delete(order.id)">
                             <i class="bi bi-trash-fill"></i> Borrar</button>
                     </td>
+                    -->
                 </tr>
             </tbody>
         </table>
     </div>
 
 </div>
+
+
 
 <app-footer></app-footer>

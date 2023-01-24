@@ -5,18 +5,15 @@ export class Order{
     products: any;
     services: any;
     tax: any;
-    name: string;
-    price: number;
+    company : string;
 
-    constructor(idPerson: number, idCompany: number, products: any, services: any, tax: any, name: string, price:number){
+    constructor(idPerson: number, idCompany: number, products: any, services: any, company : string){
         
         this.idPerson = idPerson;
         this.idCompany = idCompany;
         this.products = products;
         this.services = services;
-        this.tax = tax;
-        this.name = name;
-      this.price = price;
+        this.company = company;
     }
 }    
 
