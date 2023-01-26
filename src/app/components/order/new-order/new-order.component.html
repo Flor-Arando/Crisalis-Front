@@ -1,1 +1,63 @@
-<p>new-order works!</p>
+<form (ngSubmit)="onUpdate()" > <!-- novalidate #f="ngForm" -->
+    <div class="form-group">
+        <label for="person">Persona</label>
+        <select id="person" name="person" [(ngModel)]="selectedPerson" required>
+            <option *ngFor="let person of persons" value="{{ person.id }}">{{ person.firstName }} {{ person.lastName }}</option>
+        </select>
+    </div>
+    <br>
+    <div class="form-group">
+        <label for="company">Empresa</label>
+        <!-- TODO: que se inicialize con el valor del registro -->
+        <!--
+        <select id="company" name="company" [(ngModel)]="company" required>
+            <option *ngRepeat="person in persons" value="{{ person.id }}">{{ a.firstName }}</option>
+        </select>
+        -->
+    </div>
+    <br>
+    <div class="form-group">
+        <label for="product">Producto</label>
+        <select id="product" name="product" [(ngModel)]="selectedProduct" required>
+            <option *ngFor="let product of products" value="{{ product.id }}">{{ product.name }}</option>
+        </select>
+    </div>
+    <br>
+    <div class="form-group">
+        <label for="quantity">Cantidad</label>
+        <input type="number" class="form-control" id="quantity" name="quantity" [(ngModel)]="quantity" required>
+    </div>
+    <div class="form-group">
+        <label for="warranty">Garantía</label>
+        <input type="number" class="form-control" id="warranty" name="warranty" [(ngModel)]="warranty" required>
+    </div>
+
+    <button (click)="addProduct()">+</button>
+    
+    <div class="form-group">
+        <label for="cuit">Impuesto</label>
+        <!--<input type="text" class="form-control" id="cuit" name="cuit" [(ngModel)]="compania.cuit" required>-->
+    </div>
+
+
+
+
+
+
+    <br>
+    <button class="btn btn-primary">
+        Actualizar
+    </button>
+</form>
+
+<div>
+    selected person {{ selectedPerson }}
+    <br/>
+    warranty {{ warranty }}
+    <br/>
+    quantity {{ quantity }}
+    <br/>
+    selected product {{ selectedProduct }}
+    <br/>
+    added products {{ addedProducts | json }}
+</div>

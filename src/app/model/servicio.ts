@@ -4,7 +4,7 @@ export class Servicio{
     price: number;
     
 
-    constructor(name: string, price: number, support: boolean){
+    constructor(name: string, price: number){
         
         this.name = name;
         this.price = price;

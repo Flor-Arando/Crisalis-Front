@@ -10,8 +10,8 @@ import { ServicioService } from 'src/app/service/servicio.service';
 })
 export class NewServicioComponent implements OnInit {
   name: string = '';
-  unitPrice: number;
-  support: boolean;
+  price: number;
+ 
 
   constructor( private servicioService: ServicioService, private router: Router ) { }
     
@@ -19,14 +19,14 @@ export class NewServicioComponent implements OnInit {
     }
   
     onCreate(): void {
-      const servicios = new Servicio(this.name, this.unitPrice, this.support);
+      const servicios = new Servicio(this.name, this.price);
       this.servicioService.save(servicios).subscribe(
         data => {
           alert("Servicio añadido");
-          this.router.navigate(['']);
+          this.router.navigate(['/servicio']);
         }, err => {
           alert("Falló");
-          this.router.navigate(['']);
+          this.router.navigate(['/servicio']);
         }
       )
     }

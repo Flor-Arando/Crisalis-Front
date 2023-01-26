@@ -30,9 +30,8 @@ export class EditCompanyComponent implements OnInit {
     this.companyService.update(id, this.compania).subscribe(
       data => {
         this.router.navigate(['/company']);
-      }, err =>{
-         alert("Error al modificar empresa");
-         this.router.navigate(['/company']);
+      }, err => {
+        alert("ERROR: " + err.error.message);
       }
     )
   }

@@ -26,6 +26,7 @@ import { EditProductComponent } from './components/product/edit-product/edit-pro
 import { EditServicioComponent } from './servicio/edit-servicio/edit-servicio.component';
 import { EditServiciosComponent } from './components/servicio/edit-servicios/edit-servicios.component';
 import { NewServicioComponent } from './components/servicio/new-servicio/new-servicio.component';
+import { NewOrderComponent } from './components/order/new-order/new-order.component';
 
 
 
@@ -47,6 +48,7 @@ import { NewServicioComponent } from './components/servicio/new-servicio/new-ser
     EditCompanyComponent,
     NewCompanyComponent,
     NewProductComponent,
+    NewOrderComponent,
     EditProductComponent,
     EditServicioComponent,
     EditServiciosComponent,

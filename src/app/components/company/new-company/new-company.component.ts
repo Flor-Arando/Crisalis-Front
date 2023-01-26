@@ -25,8 +25,7 @@ export class NewCompanyComponent implements OnInit {
           alert("Empresa añadida");
           this.router.navigate(['/company']);
         }, err => {
-          alert("Falló");
-          this.router.navigate(['/company']);
+          alert(err.error.message);
         }
       )
     }

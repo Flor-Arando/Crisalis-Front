@@ -19,8 +19,8 @@ constructor(private servicioService: ServicioService, private activatedRouter: A
       data =>{
         this.servicio = data;
       }, err =>{
-        alert("Error al modificar el producto");
-        this.router.navigate(['']);
+        alert("Error al modificar el servicioAA");
+        this.router.navigate(['/servicio']);
       }
     )
   }
@@ -29,10 +29,10 @@ constructor(private servicioService: ServicioService, private activatedRouter: A
     const id = this.activatedRouter.snapshot.params['id'];
     this.servicioService.update(id, this.servicio).subscribe(
       data => {
-        this.router.navigate(['']);
+        this.router.navigate(['/servicio']);
       }, err =>{
          alert("Error al modificar el servicio");
-         this.router.navigate(['']);
+         this.router.navigate(['/servicio']);
       }
     )
   }

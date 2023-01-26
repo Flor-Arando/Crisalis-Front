@@ -25,8 +25,8 @@ export class NewProductComponent implements OnInit {
           alert("Producto añadido");
           this.router.navigate(['/product']);
         }, err => {
-          alert("Falló");
-          this.router.navigate(['/product']);
+          alert(err.error.message);
+          //this.router.navigate(['/product']);
         }
       )
     }
