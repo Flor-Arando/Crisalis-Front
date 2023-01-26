@@ -20,7 +20,7 @@ export class EditProductComponent implements OnInit {
         this.producto = data;
       }, err =>{
         alert("Error al modificar el producto");
-        this.router.navigate(['']);
+        this.router.navigate(['/product']);
       }
     )
   }
@@ -29,10 +29,10 @@ export class EditProductComponent implements OnInit {
     const id = this.activatedRouter.snapshot.params['id'];
     this.productService.update(id, this.producto).subscribe(
       data => {
-        this.router.navigate(['']);
+        this.router.navigate(['/product']);
       }, err =>{
          alert("Error al modificar el producto");
-         this.router.navigate(['']);
+         this.router.navigate(['/product']);
       }
     )
   }

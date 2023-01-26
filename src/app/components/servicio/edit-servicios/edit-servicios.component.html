@@ -1,6 +1,9 @@
 <app-menu></app-menu>
 <div class="container" *ngIf="servicio">
     <div class="row">
+        <h1>Modificar servicio</h1>
+        <br>
+        <br>
         <div>
             <form (ngSubmit)="onUpdate()" novalidate #f="ngForm">
                 <div class="form-group">
@@ -10,13 +13,9 @@
                 <br>
                 <div class="form-group">
                     <label for="unitPrice">Precio unitario</label>
-                    <input type="number" class="form-control" id="unitPrice" name="unitPrice" [(ngModel)]="servicio.unitPrice" required>
+                    <input type="number" class="form-control" id="price" name="price" [(ngModel)]="servicio.price" required>
                 </div>
-                <br>
-                <div class="form-group">
-                    <label for="support">Cargo por soporte</label>
-                    <input type="boolean" class="form-control" id="support" name="support" [(ngModel)]="servicio.support" required>
-                </div>
+                
                 <br>
                 <button class="btn btn-primary">
                     Actualizar

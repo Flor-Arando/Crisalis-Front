@@ -4,10 +4,13 @@
 
 <div class="container">
     <div class="row">
+        <h1>Alta de servicio</h1>
+            <br>
+            <br>
         <div>
             <form (ngSubmit)="onCreate()" novalidate #f="ngForm">
                 <div class="form-group">
-                    <label for="name">Nombre del servicio</label>
+                    <label for="name">Nombre</label>
                     <input type="text" class="form-control" id="name" name="name" [(ngModel)]="name" required>
                 </div>
                 <br>
@@ -15,15 +18,11 @@
                     <label for="unitPrice">Precio unitario</label>
                     <input type="number" class="form-control" id="unitPrice" name="unitPrice" [(ngModel)]="unitPrice" required>
                 </div>
-                <br>
-                <div class="form-group">
-                    <label for="support">Cargo por soporte</label>
-                    <input type="text" class="form-control" id="support" name="support" [(ngModel)]="support" required>
-                </div>
+                
                 <br>
                 
                 <button class="btn btn-primary">
-                    Agregar servicio
+                    Aceptar
                 </button>
             </form>
         </div>

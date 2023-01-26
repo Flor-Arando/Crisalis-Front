@@ -20,7 +20,7 @@ export class EditPersonComponent implements OnInit {
         this.persona = data;
       }, err =>{
         alert("Error al modificar la persona");
-        this.router.navigate(['']);
+        this.router.navigate(['/person']);
       }
     )
   }
@@ -29,10 +29,10 @@ export class EditPersonComponent implements OnInit {
     const id = this.activatedRouter.snapshot.params['id'];
     this.personaService.update(id, this.persona).subscribe(
       data => {
-        this.router.navigate(['']);
+        this.router.navigate(['/person']);
       }, err =>{
          alert("Error al modificar persona");
-         this.router.navigate(['']);
+         this.router.navigate(['/person']);
       }
     )
   }
