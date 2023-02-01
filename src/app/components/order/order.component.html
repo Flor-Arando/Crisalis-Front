@@ -5,39 +5,37 @@
         <br>
             <button class="btn btn-dark" routerLink="/new-order" *ngIf="isLogged">Agregar</button></h1>
         
-        <div class="col-lg-2">
+       <!-- <div class="col-lg-2">
             <h3>
                 Pedidos:
             </h3>
-        </div>
+        </div> -->
 
     <div class="col lg 1"></div>
     <div class="col-lg-12">
         <table class="table">
             <thead>
-                <th>ORDER NO.</th>
+                <th>ORDER No.</th>
+                <th>PERSON</th>
                 <th>COMPANY</th>
-                <th>PRODUCTS</th>
             </thead>
             <tbody>
                 <tr *ngFor="let order of orders">
                     <td>
-                        {{order.id}}
+                        {{ order.id }}
                     </td>
                     <td>
-                        {{order.company}}
+                        {{ order.person }}
                     </td>
                     <td>
-                        <p *ngFor="let product of order.products">
-                            {{ product.name }} x {{ product.quantity }}
-                        </p>
+                        {{ order.company }}
                     </td>
                     <!--<td>
                         <h2>{{i.id}} {{i.service}} </h2>
                     </td>-->
                     
                     <td *ngIf="isLogged">
-                        <button class="btn btn-light" routerLink="/edit-order/{{order.id}}">
+                        <button class="btn btn-light" routerLink="/edit-order/{{order.id}}"> 
                             <i class="bi bi-pencil-fill"></i> Editar</button>
                     </td>
                     <td *ngIf="isLogged">

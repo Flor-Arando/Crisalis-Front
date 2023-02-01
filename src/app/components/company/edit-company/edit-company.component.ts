@@ -36,4 +36,8 @@ export class EditCompanyComponent implements OnInit {
     )
   }
 
+  out():void{
+    this.router.navigate(['/company'])
+  }
+
 }

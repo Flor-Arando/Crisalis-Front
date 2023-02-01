@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Product } from 'src/app/model/product';
+import { Tax } from 'src/app/model/tax';
 import { ProductService } from 'src/app/service/product.service';
+import { TaxService } from 'src/app/service/tax.service';
 
 @Component({
   selector: 'app-new-product',
@@ -11,16 +13,30 @@ import { ProductService } from 'src/app/service/product.service';
 export class NewProductComponent implements OnInit {
   name: string = '';
   unitPrice: number;
-  warranty: boolean;
+  taxes : Tax[];
+  selectedTax : Number[] = []
+  
 
-  constructor( private productService: ProductService, private router: Router ) { }
+  constructor( 
+    private productService: ProductService, 
+    private router: Router,
+    private taxService: TaxService
+    ) { }
     
     ngOnInit(): void {
+      this.loadTaxes();
+    }
+
+    loadTaxes() : void {
+      this.taxService.list().subscribe(data => {
+        this.taxes = data;
+        //this.selectedTax = new Array(this.taxes.length).fill(false);
+      });
     }
   
-    onCreate(): void {
-      const productos = new Product(this.name, this.unitPrice);
-      this.productService.save(productos).subscribe(
+    save(): void {
+      const producto = new Product(this.name, this.unitPrice, this.selectedTax);
+      this.productService.save(producto).subscribe(
         data => {
           alert("Producto añadido");
           this.router.navigate(['/product']);
@@ -29,6 +45,18 @@ export class NewProductComponent implements OnInit {
           //this.router.navigate(['/product']);
         }
       )
+    }
+
+    manageTax (id : number): void {
+      if (this.selectedTax.includes(id)) {
+        this.selectedTax = this.selectedTax.filter(existingId => existingId != id );
+      } else {
+        this.selectedTax.push(id);
+      }
+    }
+
+    out():void{
+      this.router.navigate(['/product'])
     }
 
 }

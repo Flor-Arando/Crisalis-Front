@@ -6,7 +6,7 @@
         <br>
         <br>
         <div>
-            <form (ngSubmit)="onCreate()" novalidate #f="ngForm">
+            <form (ngSubmit)="save()" novalidate #f="ngForm">
                 <div class="form-group">
                     <label for="name">Nombre</label>
                     <input type="text" class="form-control" id="name" name="name" [(ngModel)]="name" required>
@@ -17,10 +17,27 @@
                     <input type="text" class="form-control" id="unitPrice" name="unitPrice" [(ngModel)]="unitPrice" required>
                 </div>
                 <br>
+                <br>
+
+                <div class="form-group">
+                    <label for="tax">Impuestos</label>
+                    <br>
+                    <br>
+                <div class="form-check">
+                    <div *ngFor="let tax of taxes">
+                        <input class="form-check-input" type="checkbox" (click)="manageTax(tax.id)" [checked] = "selectedTax.includes(tax.id)">
+                        <label class="form-check-label" for="flexCheckDefault">
+                            {{ tax.name }} ({{ tax.aliquot }}%)
+                        </label>
+                    </div>
+                </div>
+                </div>
+                <br>  
                 
-                <button class="btn btn-primary">
-                    Aceptar
-                </button>
+                <div class="d-grid gap-2 d-md-block">
+                    <button class="btn btn-primary" type="submit">Aceptar</button>
+                    <button class="btn btn-danger" (click)="out()">Cancelar</button>
+                </div>
             </form>
         </div>
     </div>

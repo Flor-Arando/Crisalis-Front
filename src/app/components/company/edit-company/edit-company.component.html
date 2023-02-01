@@ -21,9 +21,10 @@
                     <input type="text" class="form-control" id="cuit" name="cuit" [(ngModel)]="compania.cuit" required>
                 </div>
                 <br>
-                <button class="btn btn-primary">
-                    Actualizar
-                </button>
+                <div class="d-grid gap-2 d-md-block">
+                    <button class="btn btn-primary">Actualizar</button>
+                    <button class="btn btn-danger" (click)="out()">Cancelar</button>
+                </div>
             </form>
         </div>
     </div>

@@ -16,11 +16,12 @@ export class EditPersonComponent implements OnInit {
   ngOnInit(): void {
     const id = this.activatedRouter.snapshot.params['id'];
     this.personaService.detail(id).subscribe(
-      data =>{
+      data => {
         this.persona = data;
-      }, err =>{
+      }, err => {
+        console.log(err);
         alert("Error al modificar la persona");
-        this.router.navigate(['/person']);
+        //this.router.navigate(['/person']);
       }
     )
   }

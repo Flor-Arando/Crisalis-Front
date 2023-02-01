@@ -1,63 +1,191 @@
-<form (ngSubmit)="onUpdate()" > <!-- novalidate #f="ngForm" -->
-    <div class="form-group">
-        <label for="person">Persona</label>
-        <select id="person" name="person" [(ngModel)]="selectedPerson" required>
-            <option *ngFor="let person of persons" value="{{ person.id }}">{{ person.firstName }} {{ person.lastName }}</option>
-        </select>
+<app-menu></app-menu>
+<div class="container">
+    <div class="row">
+        <h1>Alta de pedido</h1>
+        <br>
+        <br>
+        <div>
+
+            <form> <!--(ngSubmit)="onUpdate()" novalidate #f="ngForm" -->
+
+                <div class="form-group">
+
+                    <label for="person">Persona</label>
+
+                    <select id="person" name="person" [(ngModel)]="selectedPerson" required>
+
+                        <option *ngFor="let person of persons" value="{{ person.id }}">{{ person.firstName }} {{
+                            person.lastName }}</option>
+
+                    </select>
+
+                </div>
+
+                <br>
+
+                <div class="form-group">
+
+                    <label for="company">Empresa</label>
+
+                    <!-- TODO: que se inicialize con el valor del registro -->
+
+                    <select id="company" name="company" [(ngModel)]="selectedCompany" required>
+
+                        <option *ngFor="let company of companies" value="{{ company.id }}">{{ company.companyName }}
+                        </option>
+
+                    </select>
+
+                </div>
+
+                <br>
+
+                <div class="form-group">
+
+                    <label for="product">Producto</label>
+
+                    <select id="product" name="product" [(ngModel)]="selectedProduct" required>
+
+                        <option *ngFor="let product of products" value="{{ product.id }}">{{ product.name }}</option>
+
+                    </select>
+
+                </div>
+
+                <br>
+
+                <div class="form-group">
+
+                    <label for="quantity">Cantidad</label>
+
+                    <input type="number" class="form-control" id="quantity" name="quantity" [(ngModel)]="quantity"
+                        required>
+
+                </div>
+
+                <div class="form-group">
+
+                    <label for="warranty">Garantía</label>
+
+                    <input type="number" class="form-control" id="warranty" name="warranty" [(ngModel)]="warranty"
+                        required>
+
+                </div>
+
+
+
+                        <!--<div class="form-group">
+
+                    <label for="tax">Impuesto</label>
+
+                    <select id="tax" name="tax" [(ngModel)]="selectedTax" required>
+
+                    <option *ngFor="let tax of taxes" value="{{ tax.name }}">{{ tax.name }} ({{ tax.aliquot }}%)</option>
+
+                    </select>
+
+                    </div>-->
+
+                <br>
+
+                <button (click)="addProduct()">AGREGAR PRODUCTO</button>
+
+                <br>
+                <br>
+
+                <div class="form-group">
+
+                    <label for="service">Servicio</label>
+                    
+                    <select id="service" name="service" [(ngModel)]="selectedService" required>
+
+                        <option *ngFor="let service of services" value="{{ service.id }}">{{ service.name }}</option>
+
+                    </select>
+                    <br>
+                    <br>
+                </div>
+                
+                <button (click)="addService()">AGREGAR SERVICIO</button>
+
+                <br>
+                <br>
+                <div class="d-grid gap-2 d-md-block">
+
+                    <button class="btn btn-primary" (click)="save()">Aceptar</button>
+
+                    <button class="btn btn-danger" (click)="out()">Cancelar</button> <!--me da error 500 -->
+
+                </div>
+
+                <!--<div>
+                    selected person {{ selectedPerson }}
+                    <br />
+                    warranty {{ warranty }}
+                    <br />
+                    quantity {{ quantity }}
+                    <br />
+                    selected product {{ selectedProduct }}
+                    <br />
+                    added products {{ addedProducts | json }}
+                    <br />
+                    selected company {{ selectedCompany }}
+                    <br />
+                    added services {{ addedServices | json }}
+                </div>-->
+
+                <table class="table" *ngIf="addedProducts.length > 0">
+                    <thead>
+                        <th scope="col">NOMBRE</th>
+                        <th scope="col">CANTIDAD</th>
+                        <th scope="col">GARANTIA</th>
+                        <th scope="col">UNITARIO</th>
+                        <th scope="col">IMPUESTOS</th>
+                        <th scope="col">POR CANTIDAD</th>
+                        <th scope="col">TOTAL</th>
+                        <th scope="col">&nbsp;</th>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let addedProduct of addedProducts">
+                            <td>{{ addedProduct.name }}</td>
+                            <td>{{ addedProduct.quantity }}</td>
+                            <td>{{ addedProduct.warranty ? addedProduct.warranty : 'No'}}</td>
+                            <td>${{ addedProduct.unitPrice }}</td>
+                            <td>
+                                <p *ngFor="let tax of addedProduct.taxes">{{ tax.name }}: ${{ tax.value }}</p>
+                            </td>
+                            <td>${{ addedProduct.unitPrice * addedProduct.quantity }}</td>
+                            <td>${{ addedProduct.total }}</td>
+                            <td>
+                                <button type="button" class="btn btn-danger" (click)="removeProduct(addedProduct.id)">X</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <table class="table" *ngIf="addedServices.length > 0">
+                    <thead>
+                        <th scope="col">NOMBRE</th>
+                        <th scope="col">&nbsp;</th>
+                        <th scope="col">&nbsp;</th>
+                        <th scope="col">&nbsp;</th>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let addedService of addedServices">
+                            <td>{{ addedService.name }}</td>
+                            <th scope="col">&nbsp;</th>
+                            <th scope="col">&nbsp;</th>
+                            <td>
+                                <button type="button" class="btn btn-danger" (click)="removeService(addedService.id)">X</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                total pedido: ${{ total }}
+
+            </form>
+        </div>
     </div>
-    <br>
-    <div class="form-group">
-        <label for="company">Empresa</label>
-        <!-- TODO: que se inicialize con el valor del registro -->
-        <!--
-        <select id="company" name="company" [(ngModel)]="company" required>
-            <option *ngRepeat="person in persons" value="{{ person.id }}">{{ a.firstName }}</option>
-        </select>
-        -->
-    </div>
-    <br>
-    <div class="form-group">
-        <label for="product">Producto</label>
-        <select id="product" name="product" [(ngModel)]="selectedProduct" required>
-            <option *ngFor="let product of products" value="{{ product.id }}">{{ product.name }}</option>
-        </select>
-    </div>
-    <br>
-    <div class="form-group">
-        <label for="quantity">Cantidad</label>
-        <input type="number" class="form-control" id="quantity" name="quantity" [(ngModel)]="quantity" required>
-    </div>
-    <div class="form-group">
-        <label for="warranty">Garantía</label>
-        <input type="number" class="form-control" id="warranty" name="warranty" [(ngModel)]="warranty" required>
-    </div>
-
-    <button (click)="addProduct()">+</button>
-    
-    <div class="form-group">
-        <label for="cuit">Impuesto</label>
-        <!--<input type="text" class="form-control" id="cuit" name="cuit" [(ngModel)]="compania.cuit" required>-->
-    </div>
-
-
-
-
-
-
-    <br>
-    <button class="btn btn-primary">
-        Actualizar
-    </button>
-</form>
-
-<div>
-    selected person {{ selectedPerson }}
-    <br/>
-    warranty {{ warranty }}
-    <br/>
-    quantity {{ quantity }}
-    <br/>
-    selected product {{ selectedProduct }}
-    <br/>
-    added products {{ addedProducts | json }}
 </div>
+           

@@ -31,6 +31,10 @@ export class AddPersonComponent implements OnInit {
         }
       )
     }
+
+    out():void{
+      this.router.navigate(['/person'])
+    }
     
     
 

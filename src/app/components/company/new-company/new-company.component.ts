@@ -30,4 +30,8 @@ export class NewCompanyComponent implements OnInit {
       )
     }
 
+    out():void{
+      this.router.navigate(['/company'])
+    }
+
 }
