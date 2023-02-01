@@ -15,11 +15,27 @@
                     <label for="unitPrice">Precio unitario</label>
                     <input type="number" class="form-control" id="price" name="price" [(ngModel)]="servicio.price" required>
                 </div>
-                
                 <br>
-                <button class="btn btn-primary">
-                    Actualizar
-                </button>
+                <div class="form-group">
+                    <label for="tax">Impuestos</label>
+                    <br>
+                    <br>
+                <div class="form-check">
+                    <div *ngFor="let tax of taxes">
+                        <input class="form-check-input" type="checkbox" (click)="manageTax(tax.id)" [checked] = "selectedTax.includes(tax.id)">
+                        <label class="form-check-label" for="flexCheckDefault">
+                            {{ tax.name }} ({{ tax.aliquot }}%)
+                        </label>
+                    </div>
+                </div>
+                </div>
+                <br>
+                
+                <div class="d-grid gap-2 d-md-block">
+                    <button class="btn btn-primary">Actualizar</button>
+                    <button class="btn btn-danger" (click)="out()">Cancelar</button>
+                </div>
+            
             </form>
         </div>
     </div>

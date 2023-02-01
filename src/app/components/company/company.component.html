@@ -22,8 +22,7 @@
                         <h2>{{i.id}} {{i.companyName}} </h2>
                     </td>
                     <td>
-                        <h2>{{i.activityStart}}</h2>
-
+                        <h2>{{ i.activityStart | date:'dd / MM / yyyy' }}</h2>
                     </td>
                     <td>
                         <h2>{{i.cuit}}</h2>

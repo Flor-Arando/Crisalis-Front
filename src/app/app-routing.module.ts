@@ -8,6 +8,8 @@ import { EditPersonComponent } from './components/edit-person/edit-person.compon
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
 import { MenuComponent } from './components/menu/menu.component';
+import { EditOrderComponent } from './components/order/edit-order/edit-order.component';
+import { NewOrderComponent } from './components/order/new-order/new-order.component';
 import { OrderComponent } from './components/order/order.component';
 import { PersonComponent } from './components/person/person.component';
 import { EditProductComponent } from './components/product/edit-product/edit-product.component';
@@ -38,8 +40,8 @@ const routes: Routes = [
   { path: 'edit-product/:id', component: EditProductComponent },
   { path: 'new-servicio', component: NewServicioComponent },
   { path: 'edit-servicios/:id', component: EditServiciosComponent },
-  { path: 'edit-order/:id', component: EditServiciosComponent },
-  { path: 'new-order', component: EditServiciosComponent }
+  { path: 'edit-order/:id', component: EditOrderComponent },
+  { path: 'new-order', component: NewOrderComponent }
 
 ];
 

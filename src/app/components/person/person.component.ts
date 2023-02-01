@@ -27,7 +27,7 @@ export class PersonComponent implements OnInit {
   }
 
   cargarPersona(): void {
-    this.personService.list().subscribe(data => { this.personas = data; })
+    this.personService.list().subscribe(data => { this.personas = data; });
   }
 
   delete(id?: number){

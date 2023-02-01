@@ -27,18 +27,19 @@ export class OrderComponent implements OnInit {
   }
 
   cargarOrder(): void {
-    this.orderService.list().subscribe(data => { this.orders = data; })
-    
+    this.orderService.list().subscribe(data => {
+      this.orders = data;
+    })
   }
 
   delete(id?: number){
-    if(id != undefined){
+    if(id != undefined) {
       this.orderService.delete(id).subscribe(
         data => {
           this.cargarOrder();
         }, err => {
           alert("No se pudo borrar el pedido");
-          this.router.navigate(['/order']);
+          //this.router.navigate(['/order']);
         }
       )
     }
