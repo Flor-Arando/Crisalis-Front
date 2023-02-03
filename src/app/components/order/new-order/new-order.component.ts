@@ -21,26 +21,26 @@ import { OrderService } from 'src/app/service/order.service';
 })
 export class NewOrderComponent implements OnInit {
   persons: Person[] = [];
-  selectedPerson : number;
-  warranty : number;
-  quantity : number;
+  selectedPerson: number;
+  warranty: number;
+  quantity: number;
   products: Product[] = [];
-  selectedProduct : number;
-  addedProducts : any[] = [];
-  companies : Company[];
-  selectedCompany : number;
-  services : Servicio[];
-  selectedService : number;
-  addedServices : any[] = [];
-  total : number = 0;
-  
+  selectedProduct: number;
+  addedProducts: any[] = [];
+  companies: Company[];
+  selectedCompany: number;
+  services: Servicio[];
+  selectedService: number;
+  addedServices: any[] = [];
+  total: number = 0;
+
   constructor(
     private personService: PersonService,
     private productService: ProductService,
     private companyService: CompanyService,
     private serviceService: ServicioService,
-    private router : Router,
-    private orderService : OrderService
+    private router: Router,
+    private orderService: OrderService
   ) { }
 
   ngOnInit(): void {
@@ -50,31 +50,31 @@ export class NewOrderComponent implements OnInit {
     this.loadServices();
   }
 
-  cargarPersonas() : void {
+  cargarPersonas(): void {
     this.personService.list().subscribe(data => {
       this.persons = data;
     });
   }
 
-  loadProducts() : void {
+  loadProducts(): void {
     this.productService.list().subscribe(data => {
       this.products = data;
     });
   }
 
-  loadCompanies() : void {
+  loadCompanies(): void {
     this.companyService.list().subscribe(data => {
       this.companies = data;
     });
   }
 
-  loadServices() : void {
+  loadServices(): void {
     this.serviceService.list().subscribe(data => {
       this.services = data;
     });
   }
 
-  addProduct() : void {
+  addProduct(): void {
     if (this.addedProducts.find(product => product.id == this.selectedProduct)) {
       return;
     }
@@ -88,8 +88,8 @@ export class NewOrderComponent implements OnInit {
     console.log(product.taxes);
     for (let tax of product.taxes) {
       taxes.push({
-        "name" : tax.name,
-        "value" : product.unitPrice * (tax.aliquot / 100)
+        "name": tax.name,
+        "value": product.unitPrice * (tax.aliquot / 100)
       });
     }
     /*let product = {
@@ -100,15 +100,15 @@ export class NewOrderComponent implements OnInit {
     } : {"quantity" : number; "warranty":number; "tax":string; "id":number};*/
     let initialValue = 0;
     let addedProduct /*: { "quantity" : number; "warranty" : number; "id" : number; "name" : string }*/ = {
-      "quantity" : this.quantity,
-      "warranty" : this.warranty,
-      "id" : this.selectedProduct,
-      "name" : product.name,
-      "unitPrice" : product.unitPrice,
-      "taxes" : taxes,
-      "total" : 
-      ((product.unitPrice * 0.02 * (this.warranty ?? 0)) + product.unitPrice) * this.quantity
-      + (taxes.reduce((accumulator, currentValue) => accumulator + currentValue.value, initialValue)) * this.quantity
+      "quantity": this.quantity,
+      "warranty": this.warranty,
+      "id": this.selectedProduct,
+      "name": product.name,
+      "unitPrice": product.unitPrice,
+      "taxes": taxes,
+      "total":
+        ((product.unitPrice * 0.02 * (this.warranty ?? 0)) + product.unitPrice) * this.quantity
+        + (taxes.reduce((accumulator, currentValue) => accumulator + currentValue.value, initialValue)) * this.quantity
     };
     // TODO: arreglar esto
     //console.log(this.selectedProduct);
@@ -123,14 +123,14 @@ export class NewOrderComponent implements OnInit {
     this.total = this.addedProducts.reduce((accumulator, currentValue) => accumulator + currentValue.total, initialValue)
   }
 
-  addService() : void {
+  addService(): void {
     this.addedServices.push({
-      "id" : this.selectedService,
-      "name" : this.services.find(service => service.id == this.selectedService).name
+      "id": this.selectedService,
+      "name": this.services.find(service => service.id == this.selectedService).name
     });
   }
 
-  save() : void {
+  save(): void {
     const order = new Order(this.selectedPerson, this.selectedCompany, "", "", this.addedProducts, this.addedServices);
     this.orderService.save(order).subscribe(
       data => {
@@ -143,15 +143,15 @@ export class NewOrderComponent implements OnInit {
     )
   }
 
-  out() : void {
+  out(): void {
     this.router.navigate(['/order'])
   }
 
-  removeProduct(id : number) : void {
+  removeProduct(id: number): void {
     this.addedProducts = this.addedProducts.filter(product => product.id != id);
   }
 
-  removeService(id : number) : void {
+  removeService(id: number): void {
     this.addedServices = this.addedServices.filter(service => service.id != id);
   }
 }

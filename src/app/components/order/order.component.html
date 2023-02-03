@@ -33,10 +33,18 @@
                     <!--<td>
                         <h2>{{i.id}} {{i.service}} </h2>
                     </td>-->
-                    
+                    <td *ngIf="isLogged">
+                        <button class="btn btn-info" (click)="details(order.id)">
+                            <i class="bi bi-trash-fill"></i> Detalles</button>
+                    </td>
+
                     <td *ngIf="isLogged">
                         <button class="btn btn-light" routerLink="/edit-order/{{order.id}}"> 
                             <i class="bi bi-pencil-fill"></i> Editar</button>
+                    </td>
+                    <td *ngIf="isLogged">
+                        <button class="btn btn-success"> 
+                            <i class="bi bi-pencil-fill"></i> Estado</button>
                     </td>
                     <td *ngIf="isLogged">
                         <button class="btn btn-danger" (click)="delete(order.id)">

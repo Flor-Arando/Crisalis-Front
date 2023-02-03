@@ -18,6 +18,7 @@ import { ProductComponent } from './components/product/product.component';
 import { EditServiciosComponent } from './components/servicio/edit-servicios/edit-servicios.component';
 import { NewServicioComponent } from './components/servicio/new-servicio/new-servicio.component';
 import { ServicioComponent } from './components/servicio/servicio.component';
+import { StateComponent } from './components/state/state.component';
 import { UserComponent } from './components/user/user.component';
 
 const routes: Routes = [
@@ -41,8 +42,8 @@ const routes: Routes = [
   { path: 'new-servicio', component: NewServicioComponent },
   { path: 'edit-servicios/:id', component: EditServiciosComponent },
   { path: 'edit-order/:id', component: EditOrderComponent },
-  { path: 'new-order', component: NewOrderComponent }
-
+  { path: 'new-order', component: NewOrderComponent },
+  { path: 'order-service-state', component: StateComponent }
 ];
 
 @NgModule({

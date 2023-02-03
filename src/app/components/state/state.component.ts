@@ -1,4 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { TokenService } from 'src/app/service/token.service';
+import { Order } from 'src/app/model/order';
+import { Router } from '@angular/router';
+import { OrderService } from 'src/app/service/order.service';
+
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-state',
@@ -6,10 +12,42 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./state.component.css']
 })
 export class StateComponent implements OnInit {
+  orders: Order[] = []
+  isLogged = false;
 
-  constructor() { }
+  constructor(private orderService: OrderService, private tokenService: TokenService, private router: Router
+    ,private httpClient: HttpClient) { }
 
   ngOnInit(): void {
+    if (this.tokenService.getToken()) {
+      this.isLogged = true;
+    } else {
+      this.isLogged = false;
+    }
+
+    this.loadOrders();
   }
 
+  loadOrders(): void {
+    this.orderService.list().subscribe(data => {
+      this.orders = data;
+    });
+  }
+
+  // TODO: arreglar
+  changeState(orderServiceId : number) : void {
+    //console.log(orderServiceId);
+    //this.httpClient.patch<any>(`http://localhost:8080/order-service-state/change-active/${orderServiceId}`, {});
+    this.httpClient.patch<any>(`http://localhost:8080/order-service-state/change-active/${orderServiceId}`, {})
+    .subscribe(
+      data => {
+        //alert("Producto añadido");
+        //this.router.navigate(['/product']);
+      }, err => {
+        alert(err.error.message);
+        //this.router.navigate(['/product']);
+      }
+    )
+    ;
+  }
 }
