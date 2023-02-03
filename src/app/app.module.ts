@@ -28,6 +28,7 @@ import { EditServiciosComponent } from './components/servicio/edit-servicios/edi
 import { NewServicioComponent } from './components/servicio/new-servicio/new-servicio.component';
 import { NewOrderComponent } from './components/order/new-order/new-order.component';
 import { StateComponent } from './components/state/state.component';
+import { EditOrderComponent } from './components/order/edit-order/edit-order.component';
 
 
 
@@ -55,6 +56,7 @@ import { StateComponent } from './components/state/state.component';
     EditServiciosComponent,
     NewServicioComponent,
     StateComponent,
+    EditOrderComponent,
 
     
   ],

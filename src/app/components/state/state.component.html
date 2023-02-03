@@ -5,7 +5,7 @@
         <h1>Estado de servicios contratados</h1>
         <div *ngFor="let order of orders">
             <div>
-                <h2 *ngIf="order.id == orders[0].id">{{ order.person }}</h2>
+                <h2>{{ order.person }}</h2>
                 <h3>Order: {{ order.id }}</h3>
 
                 <table class="table">

@@ -10,9 +10,6 @@ import { OrderService } from 'src/app/service/order.service';
 import { PersonService } from 'src/app/service/person.service';
 import { ProductService } from 'src/app/service/product.service';
 import { ServicioService } from 'src/app/service/servicio.service';
-import { TokenService } from 'src/app/service/token.service';
-
-
 
 @Component({
   selector: 'app-edit-order',
@@ -20,21 +17,21 @@ import { TokenService } from 'src/app/service/token.service';
   styleUrls: ['./edit-order.component.css']
 })
 export class EditOrderComponent implements OnInit {
-/*    orders: Order = null;
+    order: Order = null;
     persons: Person[] = [];
     selectedPerson : number;
     warranty : number;
     quantity : number;
     products: Product[] = [];
-    selectedProduct : number;
+    selectedProduct : any;
     addedProducts : any[] = [];
     companies : Company[];
     selectedCompany : number;
     services : Servicio[];
-    selectedService : number;
+    selectedService : any;
     addedServices : any[] = [];
     total : number = 0;
-  */  
+    
   constructor(
     private personService: PersonService,
     private productService: ProductService,
@@ -44,35 +41,52 @@ export class EditOrderComponent implements OnInit {
     private activatedRouter: ActivatedRoute,
     private orderService: OrderService
   ) { }
-  
+
   ngOnInit(): void {
-    /*this.cargarPersonas();
+    this.cargarPersonas();
     this.loadProducts();
     this.loadCompanies();
-    this.loadServices();*/
+    this.loadServices();
+    this.loadOrder();
+    console.log(this.order);
+    
   }
-/*
+
+  loadOrder() {
+    const id = this.activatedRouter.snapshot.params['id'];
+    this.orderService.detail(id).subscribe(
+      data => {
+        this.order = data;
+      });
+    
+    this.selectedPerson = this.order.idPerson; 
+    
+  }
+
   cargarPersonas(): void {
     this.personService.list().subscribe(data => {
-      this.persons = data;
+      this.persons = data; 
     });
   }
 
   loadProducts(): void {
     this.productService.list().subscribe(data => {
       this.products = data;
+      this.selectedProduct = this.order.products; 
     });
   }
 
   loadCompanies(): void {
     this.companyService.list().subscribe(data => {
       this.companies = data;
+      this.selectedCompany = this.order.idCompany; 
     });
   }
 
   loadServices(): void {
     this.serviceService.list().subscribe(data => {
       this.services = data;
+      this.selectedService = this.order.services; 
     });
   }
 
@@ -84,7 +98,7 @@ export class EditOrderComponent implements OnInit {
     let product = this.products.find(product => product.id == this.selectedProduct);
 
     let taxes = [];
-    console.log(product.taxes);
+    
     for (let tax of product.taxes) {
       taxes.push({
         "name": tax.name,
@@ -120,9 +134,9 @@ export class EditOrderComponent implements OnInit {
     });
   }
 
-  onUpdate(): void {
+  save(): void {
     const id = this.activatedRouter.snapshot.params['id'];
-    let order = this.orders;
+    let order = this.order;
     this.orderService.update(id, order).subscribe(
       data => {
         alert("Pedido actualizado");
@@ -144,5 +158,5 @@ export class EditOrderComponent implements OnInit {
 
   removeService(id: number): void {
     this.addedServices = this.addedServices.filter(service => service.id != id);
-  }*/
+  }
 }

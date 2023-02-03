@@ -18,7 +18,7 @@ public list(): Observable<Order[]>{
   }
 
   public detail(id: number): Observable<Order>{
-    return this.httpClient.get<Order>(this.baseURL + `detail/${id}`);
+    return this.httpClient.get<Order>(this.baseURL + `${id}`);
   } 
 
   public save(order: Order): Observable<any>{

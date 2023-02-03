@@ -32,7 +32,8 @@ export class NewOrderComponent implements OnInit {
   services: Servicio[];
   selectedService: number;
   addedServices: any[] = [];
-  total: number = 0;
+  totalProducts: number = 0;
+  totalServices: number = 0;
 
   constructor(
     private personService: PersonService,
@@ -85,7 +86,7 @@ export class NewOrderComponent implements OnInit {
     let product = this.products.find(product => product.id == this.selectedProduct);
 
     let taxes = [];
-    console.log(product.taxes);
+    
     for (let tax of product.taxes) {
       taxes.push({
         "name": tax.name,
@@ -110,24 +111,45 @@ export class NewOrderComponent implements OnInit {
         ((product.unitPrice * 0.02 * (this.warranty ?? 0)) + product.unitPrice) * this.quantity
         + (taxes.reduce((accumulator, currentValue) => accumulator + currentValue.value, initialValue)) * this.quantity
     };
-    // TODO: arreglar esto
-    //console.log(this.selectedProduct);
-    //console.log(product);
-
-    //product['id'] = parseInt(this.selectedProduct);
+  
     this.addedProducts.push(addedProduct
-      //"id" : ,
+     
     );
 
     initialValue = 0;
-    this.total = this.addedProducts.reduce((accumulator, currentValue) => accumulator + currentValue.total, initialValue)
+    this.totalProducts = this.addedProducts.reduce((accumulator, currentValue) => accumulator + currentValue.total, initialValue)
   }
 
   addService(): void {
-    this.addedServices.push({
+    if (this.addedServices.find(service => service.id == this.selectedService)) {
+      return;
+    }
+
+    let service = this.services.find(service => service.id == this.selectedService);
+
+    let taxes = [];
+
+    for (let tax of service.taxes) {
+      taxes.push({
+        "name": tax.name,
+        "value": service.price * (tax.aliquot / 100)
+      });
+    }
+
+    let initialValue = 0;
+    let addedService = {
+      "supportPrice": service.supportPrice,
       "id": this.selectedService,
-      "name": this.services.find(service => service.id == this.selectedService).name
-    });
+      "name": service.name,
+      "price": service.price,
+      "taxes": taxes,
+      "total": service.price + (taxes.reduce((accumulator, currentValue) => accumulator + currentValue.value, initialValue))
+    };
+
+    this.addedServices.push (addedService);
+
+    initialValue = 0;
+    this.totalServices = this.addedServices.reduce((accumulator, currentValue) => accumulator + currentValue.total, initialValue)
   }
 
   save(): void {
