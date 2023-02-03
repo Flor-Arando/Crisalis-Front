@@ -30,24 +30,20 @@ export class StateComponent implements OnInit {
 
   loadOrders(): void {
     this.orderService.list().subscribe(data => {
-      this.orders = data;
+      // Se sacan los pedidos que no tengan servicios
+      this.orders = data.filter(order => order.services.length > 0);
     });
   }
 
   // TODO: arreglar
   changeState(orderServiceId : number) : void {
-    //console.log(orderServiceId);
-    //this.httpClient.patch<any>(`http://localhost:8080/order-service-state/change-active/${orderServiceId}`, {});
     this.httpClient.patch<any>(`http://localhost:8080/order-service-state/change-active/${orderServiceId}`, {})
     .subscribe(
       data => {
-        //alert("Producto añadido");
-        //this.router.navigate(['/product']);
-      }, err => {
+      },
+      err => {
         alert(err.error.message);
-        //this.router.navigate(['/product']);
       }
-    )
-    ;
+    );
   }
 }
