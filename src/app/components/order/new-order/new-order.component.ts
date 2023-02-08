@@ -34,6 +34,10 @@ export class NewOrderComponent implements OnInit {
   addedServices: any[] = [];
   totalProducts: number = 0;
   totalServices: number = 0;
+  creationDate: Date;
+  lastModification: Date;
+  hasActiveServices: boolean = false;
+  
 
   constructor(
     private personService: PersonService,
@@ -93,28 +97,34 @@ export class NewOrderComponent implements OnInit {
         "value": product.unitPrice * (tax.aliquot / 100)
       });
     }
-    /*let product = {
-      "quantity" : this.quantity,
-      "warranty" : this.warranty,
-      "tax" : this.selectedTax,
-      "id" : 0
-    } : {"quantity" : number; "warranty":number; "tax":string; "id":number};*/
+    
     let initialValue = 0;
-    let addedProduct /*: { "quantity" : number; "warranty" : number; "id" : number; "name" : string }*/ = {
+
+    const PRODUCT_DISCOUNT_ACTIVE_SERVICE = 10;
+    const PRODUCT_WARRANTY_INCREASE = 2;
+    const MAXIMUM_PRODUCT_DISCOUNT_VALUE = 2500;
+    let warranty = (product.unitPrice * (PRODUCT_WARRANTY_INCREASE / 100) * (this.warranty ?? 0));
+    let taxesCalculate = (taxes.reduce((accumulator, currentValue) => accumulator + currentValue.value, initialValue))* this.quantity;
+    let discount = (product.unitPrice + taxesCalculate) * (PRODUCT_DISCOUNT_ACTIVE_SERVICE / 100);
+    let productPrice = product.unitPrice + taxesCalculate;
+
+    if (this.hasActiveServices) {
+  
+      productPrice -= Math.min(discount, MAXIMUM_PRODUCT_DISCOUNT_VALUE);
+  }
+
+    let addedProduct = {
       "quantity": this.quantity,
       "warranty": this.warranty,
       "id": this.selectedProduct,
       "name": product.name,
       "unitPrice": product.unitPrice,
       "taxes": taxes,
-      "total":
-        ((product.unitPrice * 0.02 * (this.warranty ?? 0)) + product.unitPrice) * this.quantity
-        + (taxes.reduce((accumulator, currentValue) => accumulator + currentValue.value, initialValue)) * this.quantity
+      "total": (productPrice + warranty) * this.quantity,
+      "discount": discount
     };
   
-    this.addedProducts.push(addedProduct
-     
-    );
+    this.addedProducts.push(addedProduct);
 
     initialValue = 0;
     this.totalProducts = this.addedProducts.reduce((accumulator, currentValue) => accumulator + currentValue.total, initialValue)
@@ -153,7 +163,7 @@ export class NewOrderComponent implements OnInit {
   }
 
   save(): void {
-    const order = new Order(this.selectedPerson, this.selectedCompany, "", "", this.addedProducts, this.addedServices);
+    const order = new Order(this.selectedPerson, this.selectedCompany, "", "", this.addedProducts, this.addedServices, this.creationDate, this.lastModification);
     this.orderService.save(order).subscribe(
       data => {
         alert("Pedido añadido");
@@ -175,5 +185,12 @@ export class NewOrderComponent implements OnInit {
 
   removeService(id: number): void {
     this.addedServices = this.addedServices.filter(service => service.id != id);
+  }
+
+  isActive() {
+    this.orderService.activeId(this.selectedPerson).subscribe(data => {
+      this.hasActiveServices = data;
+    });
+
   }
 }

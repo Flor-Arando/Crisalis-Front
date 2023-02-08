@@ -32,5 +32,9 @@ public list(): Observable<Order[]>{
   public delete(id: number): Observable<any>{
     return this.httpClient.delete<any>(this.baseURL + `delete/${id}`);
   }
+
+  public activeId (id: number): Observable <any>{
+    return this.httpClient.get<boolean>(`http://localhost:8080/` + `order-service/active/${id}`);
+  } 
             
 }

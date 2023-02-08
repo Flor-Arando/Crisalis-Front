@@ -17,20 +17,21 @@ import { ServicioService } from 'src/app/service/servicio.service';
   styleUrls: ['./edit-order.component.css']
 })
 export class EditOrderComponent implements OnInit {
-    order: Order = null;
-    persons: Person[] = [];
-    selectedPerson : number;
-    warranty : number;
-    quantity : number;
-    products: Product[] = [];
-    selectedProduct : any;
-    addedProducts : any[] = [];
-    companies : Company[];
-    selectedCompany : number;
-    services : Servicio[];
-    selectedService : any;
-    addedServices : any[] = [];
-    total : number = 0;
+  order: Order = null;
+  persons: Person[] = [];
+  selectedPerson : number;
+  warranty : number;
+  quantity : number;
+  products: Product[] = [];
+  selectedProduct : number;
+  addedProducts : any[] = [];
+  companies : Company[];
+  selectedCompany : number;
+  services : Servicio[];
+  selectedService : any;
+  addedServices : any[] = [];
+  total : number = 0;
+  hasActiveServices: boolean = false;
     
   constructor(
     private personService: PersonService,
@@ -48,19 +49,60 @@ export class EditOrderComponent implements OnInit {
     this.loadCompanies();
     this.loadServices();
     this.loadOrder();
-    console.log(this.order);
-    
   }
 
   loadOrder() {
     const id = this.activatedRouter.snapshot.params['id'];
+
     this.orderService.detail(id).subscribe(
       data => {
         this.order = data;
+        this.selectedPerson = this.order.idPerson;
+        this.selectedCompany = this.order.idCompany;
+       //this.addedServices = this.order.services; 
+
+        this.orderService.activeId(this.order.idPerson).subscribe(data => {
+          this.hasActiveServices = data;
+
+          for (let product of this.order.products) {
+            let taxes = [];
+            for (let tax of product.taxes) {
+              taxes.push({
+                "name" : tax.name,
+                "value" : product.unit_price * (tax.aliquot / 100)
+              });
+            }
+
+            let initialValue = 0;
+            const PRODUCT_DISCOUNT_ACTIVE_SERVICE = 10;
+            const PRODUCT_WARRANTY_INCREASE = 2;
+            const MAXIMUM_PRODUCT_DISCOUNT_VALUE = 2500;
+            let warrantyValue = (product.unit_price * (PRODUCT_WARRANTY_INCREASE / 100) * (product.warranty ?? 0));
+            let taxesValue = taxes.reduce((accumulator, currentValue) => accumulator + currentValue.value, initialValue);
+            let productPrice = product.unit_price + taxesValue;
+            
+            if (this.hasActiveServices) {
+              let discount = Math.min(productPrice * (PRODUCT_DISCOUNT_ACTIVE_SERVICE / 100), MAXIMUM_PRODUCT_DISCOUNT_VALUE);
+              productPrice -= discount;
+            }
+  
+            let addedProduct = {
+              "quantity": product.quantity,
+              "warranty": product.warranty,
+              "id": product.id,
+              "name": product.name,
+              "unitPrice": product.unit_price,
+              "taxes": taxes,
+              "total": (productPrice + warrantyValue) * product.quantity
+            }
+            
+            this.addedProducts.push(addedProduct);
+          }
+  
+          let initialValue = 0;
+          this.total = this.addedProducts.reduce((accumulator, currentValue) => accumulator + currentValue.total, initialValue);
+        });
       });
-    
-    this.selectedPerson = this.order.idPerson; 
-    
   }
 
   cargarPersonas(): void {
@@ -72,21 +114,18 @@ export class EditOrderComponent implements OnInit {
   loadProducts(): void {
     this.productService.list().subscribe(data => {
       this.products = data;
-      this.selectedProduct = this.order.products; 
     });
   }
 
   loadCompanies(): void {
     this.companyService.list().subscribe(data => {
       this.companies = data;
-      this.selectedCompany = this.order.idCompany; 
     });
   }
 
   loadServices(): void {
     this.serviceService.list().subscribe(data => {
       this.services = data;
-      this.selectedService = this.order.services; 
     });
   }
 
@@ -98,7 +137,6 @@ export class EditOrderComponent implements OnInit {
     let product = this.products.find(product => product.id == this.selectedProduct);
 
     let taxes = [];
-    
     for (let tax of product.taxes) {
       taxes.push({
         "name": tax.name,
@@ -119,9 +157,7 @@ export class EditOrderComponent implements OnInit {
         + (taxes.reduce((accumulator, currentValue) => accumulator + currentValue.value, initialValue)) * this.quantity
     };
     
-    this.addedProducts.push(addedProduct
-   
-    );
+    this.addedProducts.push(addedProduct);
 
     initialValue = 0;
     this.total = this.addedProducts.reduce((accumulator, currentValue) => accumulator + currentValue.total, initialValue)
@@ -142,7 +178,6 @@ export class EditOrderComponent implements OnInit {
         alert("Pedido actualizado");
         this.router.navigate(['/order']);
       }, err => {
-        console.log(err);
         alert("ERROR: " + err.error.message);
       }
     )
@@ -154,6 +189,8 @@ export class EditOrderComponent implements OnInit {
 
   removeProduct(id: number): void {
     this.addedProducts = this.addedProducts.filter(product => product.id != id);
+    let initialValue = 0;
+    this.total = this.addedProducts.reduce((accumulator, currentValue) => accumulator + currentValue.total, initialValue)
   }
 
   removeService(id: number): void {

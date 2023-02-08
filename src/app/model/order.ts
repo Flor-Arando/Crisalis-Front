@@ -6,14 +6,18 @@ export class Order {
     company: string;
     products: any[];
     services: any[];
+    creationDate: Date;
+    lastModification: Date;
     
-    constructor(idPerson: number, idCompany: number, person: string, company:string, products: any[], services: any[]) {
+    constructor(idPerson: number, idCompany: number, person: string, company:string, products: any[], services: any[], creationDate: Date, lastModification: Date) {
         this.idPerson = idPerson;
         this.idCompany = idCompany;
         this.company = company;
         this.person = person;
         this.products = products;
         this.services = services;
+        this. creationDate = creationDate;
+        this.lastModification = lastModification;
     }
 
 /*    setId(id : number) : void {

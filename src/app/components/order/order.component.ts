@@ -45,8 +45,6 @@ export class OrderComponent implements OnInit {
     }
   }
 
-  details (id?: number) {
 
-  }
 
 }

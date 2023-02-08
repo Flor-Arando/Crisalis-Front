@@ -12,7 +12,7 @@
 
                     <label for="person">Persona</label>
 
-                    <select id="person" name="person" [(ngModel)]="selectedPerson" required>
+                    <select id="person" name="person" [(ngModel)]="selectedPerson" required (change)="isActive()">
 
                         <option *ngFor="let person of persons" value="{{ person.id }}">{{ person.firstName }} {{
                             person.lastName }}</option>
@@ -142,6 +142,7 @@
                         <th scope="col">UNITARIO</th>
                         <th scope="col">IMPUESTOS</th>
                         <th scope="col">POR CANTIDAD</th>
+                        <th scope="col">DESCUENTO</th>
                         <th scope="col">TOTAL</th>
                         <th scope="col">&nbsp;</th>
                     </thead>
@@ -153,8 +154,10 @@
                             <td>${{ addedProduct.unitPrice }}</td>
                             <td>
                                 <p *ngFor="let tax of addedProduct.taxes">{{ tax.name }}: ${{ tax.value }}</p>
+                                {{ addedProduct.taxes.length < 1 ? 'No' : '' }}
                             </td>
                             <td>${{ addedProduct.unitPrice * addedProduct.quantity }}</td>
+                            <td>{{addedProduct.discount}}</td>
                             <td>${{ addedProduct.total }}</td>
                             <td>
                                 <button type="button" class="btn btn-danger" (click)="removeProduct(addedProduct.id)">X</button>
@@ -179,6 +182,7 @@
                             <td>{{ addedService.price }}</td>
                             <td>
                                 <p *ngFor="let tax of addedService.taxes">{{ tax.name }}: ${{ tax.value }}</p>
+                                {{ addedService.taxes.length < 1 ? 'No' : '' }}
                             </td>
                             <td>${{ addedService.total }}</td>
                             
