@@ -1,42 +1,11 @@
 <app-menu></app-menu>
 <div class="container">
-<div class="row">
-  <h1>Detalles del Pedido</h1>
-    <br>
-  <div class="col-lg-12">
+    <div class="row">
+        <h1>Detalles del Pedido</h1>
+        <br>
+        <div class="col-lg-12">
 
-    <table class="table table-dark table-hover" > <!--*ngIf="addedProducts.length > 0"-->
-      <thead>
-          <th scope="col">NOMBRE</th>
-          <th scope="col">CANTIDAD</th>
-          <th scope="col">GARANTIA</th>
-          <th scope="col">UNITARIO</th>
-          <th scope="col">IMPUESTOS</th>
-          <th scope="col">POR CANTIDAD</th>
-          <th scope="col">DESCUENTOS</th>
-          <th scope="col">TOTAL</th>
-          <th scope="col">&nbsp;</th>
-      </thead>
-      <tbody>
-          <!--<tr *ngFor="let addedProduct of addedProducts">
-              <td>{{ addedProduct.name }}</td>
-              <td>{{ addedProduct.quantity }}</td>
-              <td>{{ addedProduct.warranty ? addedProduct.warranty : 'No'}}</td>
-              <td>${{ addedProduct.unitPrice }}</td>
-              <td>
-                  <p *ngFor="let tax of addedProduct.taxes">{{ tax.name }}: ${{ tax.value }}</p>
-              </td>
-              <td>${{ addedProduct.unitPrice * addedProduct.quantity }}</td>
-              <td>${{ addedProduct.total }}</td>
-              <td>
-                  <button type="button" class="btn btn-danger" (click)="removeProduct(addedProduct.id)">X</button>
-              </td>
-          </tr>-->
-      </tbody>
-  </table>
-
-
-     <table class="table table-dark table-hover">
+            <table class="table table-dark table-hover">
                 <thead>
                     <th>No PEDIDO.</th>
                     <th>PERSONA</th>
@@ -61,7 +30,7 @@
                 </tbody>
             </table>
 
-            <table class="table table-dark table-hover" > <!--*ngIf="addedServices.length > 0"-->
+            <!--<table class="table table-dark table-hover">
                 <thead>
                     <th scope="col">PRODUCTO</th>
                     <th scope="col">CANTIDAD</th>
@@ -74,27 +43,27 @@
                 <tbody>
                     <tr *ngFor="let p of order.products">
                         <td>{{ p.name }}</td>
-                            <td>{{ p.quantity }}</td>
-                            <td>{{ p.warranty ? p.warranty : 'No'}}</td>
-                            <td>${{p.unit_price }}</td>
+                        <td>{{ p.quantity }}</td>
+                        <td>{{ p.warranty ? p.warranty : 'No'}}</td>
+                        <td>${{p.unit_price }}</td>
 
-                            <td> 
+                        <td>
                             <p *ngFor="let t of p.taxes">
                                 {{ t.name }}: ${{ p.unit_price * (t.aliquot / 100) }}
                             </p>
-                         </td>
+                        </td>
 
                         <td>${{ p.total_price }}</td>
 
                     </tr>
                 </tbody>
-            </table>
+            </table> -->
 
             {{order | json }}
 
-  total pedido: <!--${{ totalProducts + totalServices }}-->
-  </div>
-</div>
+            total pedido: <!--${{ totalProducts + totalServices }}-->
+        </div>
+    </div>
 </div>
 
 <app-footer></app-footer>
