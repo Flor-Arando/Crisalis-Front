@@ -99,7 +99,6 @@ export class NewOrderComponent implements OnInit {
     }
     
     let initialValue = 0;
-
     const PRODUCT_DISCOUNT_ACTIVE_SERVICE = 10;
     const PRODUCT_WARRANTY_INCREASE = 2;
     const MAXIMUM_PRODUCT_DISCOUNT_VALUE = 2500;

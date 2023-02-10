@@ -45,7 +45,7 @@ const routes: Routes = [
   { path: 'edit-order/:id', component: EditOrderComponent },
   { path: 'new-order', component: NewOrderComponent },
   { path: 'order-service-state', component: StateComponent },
-  { path: 'order-detail', component: OrderDetailComponent }
+  { path: 'order-detail/:id', component: OrderDetailComponent }
 ];
 
 @NgModule({

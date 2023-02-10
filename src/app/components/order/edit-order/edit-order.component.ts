@@ -19,20 +19,23 @@ import { ServicioService } from 'src/app/service/servicio.service';
 export class EditOrderComponent implements OnInit {
   order: Order = null;
   persons: Person[] = [];
-  selectedPerson : number;
-  warranty : number;
-  quantity : number;
+  selectedPerson: number;
+  warranty: number;
+  quantity: number;
   products: Product[] = [];
-  selectedProduct : number;
-  addedProducts : any[] = [];
-  companies : Company[];
-  selectedCompany : number;
-  services : Servicio[];
-  selectedService : any;
-  addedServices : any[] = [];
-  total : number = 0;
+  selectedProduct: number;
+  addedProducts: any[] = [];
+  companies: Company[];
+  selectedCompany: number;
+  services: Servicio[];
+  selectedService: any;
+  addedServices: any[] = [];
+  totalProducts: number = 0;
+  totalServices: number = 0;
+  creationDate: Date;
+  lastModification: Date;
   hasActiveServices: boolean = false;
-    
+
   constructor(
     private personService: PersonService,
     private productService: ProductService,
@@ -59,7 +62,7 @@ export class EditOrderComponent implements OnInit {
         this.order = data;
         this.selectedPerson = this.order.idPerson;
         this.selectedCompany = this.order.idCompany;
-       //this.addedServices = this.order.services; 
+        //this.addedServices = this.order.services; 
 
         this.orderService.activeId(this.order.idPerson).subscribe(data => {
           this.hasActiveServices = data;
@@ -68,8 +71,8 @@ export class EditOrderComponent implements OnInit {
             let taxes = [];
             for (let tax of product.taxes) {
               taxes.push({
-                "name" : tax.name,
-                "value" : product.unit_price * (tax.aliquot / 100)
+                "name": tax.name,
+                "value": product.unit_price * (tax.aliquot / 100)
               });
             }
 
@@ -80,12 +83,12 @@ export class EditOrderComponent implements OnInit {
             let warrantyValue = (product.unit_price * (PRODUCT_WARRANTY_INCREASE / 100) * (product.warranty ?? 0));
             let taxesValue = taxes.reduce((accumulator, currentValue) => accumulator + currentValue.value, initialValue);
             let productPrice = product.unit_price + taxesValue;
-            
+
             if (this.hasActiveServices) {
               let discount = Math.min(productPrice * (PRODUCT_DISCOUNT_ACTIVE_SERVICE / 100), MAXIMUM_PRODUCT_DISCOUNT_VALUE);
               productPrice -= discount;
             }
-  
+
             let addedProduct = {
               "quantity": product.quantity,
               "warranty": product.warranty,
@@ -94,20 +97,21 @@ export class EditOrderComponent implements OnInit {
               "unitPrice": product.unit_price,
               "taxes": taxes,
               "total": (productPrice + warrantyValue) * product.quantity
+
             }
-            
+
             this.addedProducts.push(addedProduct);
           }
-  
+
           let initialValue = 0;
-          this.total = this.addedProducts.reduce((accumulator, currentValue) => accumulator + currentValue.total, initialValue);
+          this.totalProducts = this.addedProducts.reduce((accumulator, currentValue) => accumulator + currentValue.total, initialValue);
         });
       });
   }
 
   cargarPersonas(): void {
     this.personService.list().subscribe(data => {
-      this.persons = data; 
+      this.persons = data;
     });
   }
 
@@ -137,14 +141,28 @@ export class EditOrderComponent implements OnInit {
     let product = this.products.find(product => product.id == this.selectedProduct);
 
     let taxes = [];
+
     for (let tax of product.taxes) {
       taxes.push({
         "name": tax.name,
         "value": product.unitPrice * (tax.aliquot / 100)
       });
     }
-   
+
     let initialValue = 0;
+    const PRODUCT_DISCOUNT_ACTIVE_SERVICE = 10;
+    const PRODUCT_WARRANTY_INCREASE = 2;
+    const MAXIMUM_PRODUCT_DISCOUNT_VALUE = 2500;
+    let warranty = (product.unitPrice * (PRODUCT_WARRANTY_INCREASE / 100) * (this.warranty ?? 0));
+    let taxesCalculate = (taxes.reduce((accumulator, currentValue) => accumulator + currentValue.value, initialValue)) * this.quantity;
+    let discount = (product.unitPrice + taxesCalculate) * (PRODUCT_DISCOUNT_ACTIVE_SERVICE / 100);
+    let productPrice = product.unitPrice + taxesCalculate;
+
+    if (this.hasActiveServices) {
+
+      productPrice -= Math.min(discount, MAXIMUM_PRODUCT_DISCOUNT_VALUE);
+    }
+
     let addedProduct = {
       "quantity": this.quantity,
       "warranty": this.warranty,
@@ -152,27 +170,55 @@ export class EditOrderComponent implements OnInit {
       "name": product.name,
       "unitPrice": product.unitPrice,
       "taxes": taxes,
-      "total":
-        ((product.unitPrice * 0.02 * (this.warranty ?? 0)) + product.unitPrice) * this.quantity
-        + (taxes.reduce((accumulator, currentValue) => accumulator + currentValue.value, initialValue)) * this.quantity
+      "total": (productPrice + warranty) * this.quantity,
+      "discount": discount
     };
-    
+
     this.addedProducts.push(addedProduct);
 
     initialValue = 0;
-    this.total = this.addedProducts.reduce((accumulator, currentValue) => accumulator + currentValue.total, initialValue)
+    this.totalProducts = this.addedProducts.reduce((accumulator, currentValue) => accumulator + currentValue.total, initialValue)
   }
 
   addService(): void {
-    this.addedServices.push({
+    /*this.addedServices.push({
       "id": this.selectedService,
       "name": this.services.find(service => service.id == this.selectedService).name
-    });
+    });*/
+    if (this.addedServices.find(service => service.id == this.selectedService)) {
+      return;
+    }
+
+    let service = this.services.find(service => service.id == this.selectedService);
+
+    let taxes = [];
+
+    for (let tax of service.taxes) {
+      taxes.push({
+        "name": tax.name,
+        "value": service.price * (tax.aliquot / 100)
+      });
+    }
+
+    let initialValue = 0;
+    let addedService = {
+      "supportPrice": service.supportPrice,
+      "id": this.selectedService,
+      "name": service.name,
+      "price": service.price,
+      "taxes": taxes,
+      "total": service.price + (taxes.reduce((accumulator, currentValue) => accumulator + currentValue.value, initialValue))
+    };
+
+    this.addedServices.push(addedService);
+
+    initialValue = 0;
+    this.totalServices = this.addedServices.reduce((accumulator, currentValue) => accumulator + currentValue.total, initialValue)
   }
 
   save(): void {
     const id = this.activatedRouter.snapshot.params['id'];
-    let order = this.order;
+    const order = new Order(this.selectedPerson, this.selectedCompany, "", "", this.addedProducts, this.addedServices, null, null);
     this.orderService.update(id, order).subscribe(
       data => {
         alert("Pedido actualizado");
@@ -190,10 +236,17 @@ export class EditOrderComponent implements OnInit {
   removeProduct(id: number): void {
     this.addedProducts = this.addedProducts.filter(product => product.id != id);
     let initialValue = 0;
-    this.total = this.addedProducts.reduce((accumulator, currentValue) => accumulator + currentValue.total, initialValue)
+    this.totalProducts = this.addedProducts.reduce((accumulator, currentValue) => accumulator + currentValue.total, initialValue)
   }
 
   removeService(id: number): void {
     this.addedServices = this.addedServices.filter(service => service.id != id);
+  }
+
+  isActive() {
+    this.orderService.activeId(this.selectedPerson).subscribe(data => {
+      this.hasActiveServices = data;
+    });
+
   }
 }

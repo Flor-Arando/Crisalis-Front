@@ -2,18 +2,20 @@
 <div class="container" *ngIf="compania">
     <div class="row">
         <h1>Modificar empresa</h1>
-            <br>
+        <br>
         <div>
             <form (ngSubmit)="onUpdate()" novalidate #f="ngForm">
                 <div class="form-group">
                     <label for="companyName">Razón social</label>
-                    <input type="text" class="form-control" id="companyName" name="companyName" [(ngModel)]="compania.companyName" required>
+                    <input type="text" class="form-control" id="companyName" name="companyName"
+                        [(ngModel)]="compania.companyName" required>
                 </div>
                 <br>
                 <div class="form-group">
                     <label for="activityStart">Inicio de actividades</label>
-                    <!-- TODO: que se inicialize con el valor del registro -->
-                    <input type="date" class="form-control" id="activityStart" name="activityStart" [(ngModel)]="compania.activityStart" required>
+
+                    <input type="date" class="form-control" id="activityStart" name="activityStart"
+                        [(ngModel)]="compania.activityStart" required>
                 </div>
                 <br>
                 <div class="form-group">
@@ -23,6 +25,7 @@
                 <br>
                 <div class="d-grid gap-2 d-md-block">
                     <button class="btn btn-primary">Actualizar</button>
+                    &nbsp;
                     <button class="btn btn-danger" (click)="out()">Cancelar</button>
                 </div>
             </form>
@@ -30,4 +33,3 @@
     </div>
 </div>
 <app-footer></app-footer>
-

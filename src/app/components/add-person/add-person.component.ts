@@ -14,28 +14,28 @@ export class AddPersonComponent implements OnInit {
   lastName: string = '';
   dni: string = '';
 
-  constructor( private personService: PersonService, private router: Router ) { }
-    
-    ngOnInit(): void {
-    }
-  
-    onCreate(): void {
-      const personas = new Person(this.firstName, this.lastName, this.dni);
-      this.personService.save(personas).subscribe(
-        data => {
-          alert("Persona añadida");
-          this.router.navigate(['']);
-        }, err => {
-          alert("Falló");
-          this.router.navigate(['']);
-        }
-      )
-    }
+  constructor(private personService: PersonService, private router: Router) { }
 
-    out():void{
-      this.router.navigate(['/person'])
-    }
-    
-    
+  ngOnInit(): void {
+  }
+
+  onCreate(): void {
+    const personas = new Person(this.firstName, this.lastName, this.dni);
+    this.personService.save(personas).subscribe(
+      data => {
+        alert("Persona añadida");
+        this.router.navigate(['/person']);
+      }, err => {
+        alert("Falló");
+
+      }
+    )
+  }
+
+  out(): void {
+    this.router.navigate(['/person'])
+  }
+
+
 
 }

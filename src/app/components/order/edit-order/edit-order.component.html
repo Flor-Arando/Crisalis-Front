@@ -96,13 +96,13 @@
                 <br>
                 <div class="d-grid gap-2 d-md-block">
 
-                    <button class="btn btn-primary" (click)="save()">Aceptar</button>
-
+                    <button class="btn btn-primary" (click)="save()">Actualizar</button>
+                    &nbsp;
                     <button class="btn btn-danger" (click)="out()">Cancelar</button>
 
                 </div>
-
-                <table class="table" *ngIf="addedProducts.length > 0">
+                <br>
+                <table class="table table-dark table-hover" *ngIf="addedProducts.length > 0">
                     <thead>
                         <th scope="col">NOMBRE</th>
                         <th scope="col">CANTIDAD</th>
@@ -110,6 +110,7 @@
                         <th scope="col">UNITARIO</th>
                         <th scope="col">IMPUESTOS</th>
                         <th scope="col">POR CANTIDAD</th>
+                        <th scope="col">DESCUENTO</th>
                         <th scope="col">TOTAL</th>
                         <th scope="col">&nbsp;</th>
                     </thead>
@@ -121,8 +122,10 @@
                             <td>${{ addedProduct.unitPrice }}</td>
                             <td>
                                 <p *ngFor="let tax of addedProduct.taxes">{{ tax.name }}: ${{ tax.value }}</p>
+                                {{ addedProduct.taxes.length < 1 ? 'No' : '' }}
                             </td>
                             <td>${{ addedProduct.unitPrice * addedProduct.quantity }}</td>
+                            <td>{{addedProduct.discount ? addedProduct.discount : 'No'}}</td>
                             <td>${{ addedProduct.total }}</td>
                             <td>
                                 <button type="button" class="btn btn-danger" (click)="removeProduct(addedProduct.id)">X</button>
@@ -131,18 +134,26 @@
                     </tbody>
                 </table>
 
-                <table class="table" *ngIf="addedServices.length > 0">
+                <table class="table table-dark table-hover" *ngIf="addedServices.length > 0">
                     <thead>
                         <th scope="col">NOMBRE</th>
-                        <th scope="col">&nbsp;</th>
-                        <th scope="col">&nbsp;</th>
+                        <th scope="col">SOPORTE</th>
+                        <th scope="col">UNITARIO</th>
+                        <th scope="col">IMPUESTOS</th>
+                        <th scope="col">TOTAL</th>
                         <th scope="col">&nbsp;</th>
                     </thead>
                     <tbody>
                         <tr *ngFor="let addedService of addedServices">
                             <td>{{ addedService.name }}</td>
-                            <th scope="col">&nbsp;</th>
-                            <th scope="col">&nbsp;</th>
+                            <td>{{ addedService.supportPrice ? addedService.supportPrice : 'No'}}</td>
+                            <td>{{ addedService.price }}</td>
+                            <td>
+                                <p *ngFor="let tax of addedService.taxes">{{ tax.name }}: ${{ tax.value }}</p>
+                                {{ addedService.taxes.length < 1 ? 'No' : '' }}
+                            </td>
+                            <td>${{ addedService.total }}</td>
+                            
                             <td>
                                 <button type="button" class="btn btn-danger" (click)="removeService(addedService.id)">X</button>
                             </td>
@@ -150,10 +161,10 @@
                     </tbody>
                 </table>
 
-                total pedido: ${{ total }}
+                <!--total pedido: ${{ total }}-->
+                <p style="color: rgb(156, 233, 137);"> PEDIDO TOTAL: ${{ totalProducts + totalServices }} </p>
 
             </form>
         </div>
     </div>
 </div>
-<app-footer></app-footer>

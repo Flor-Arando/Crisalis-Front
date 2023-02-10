@@ -6,16 +6,15 @@
         <br>
         <div>
 
-            <form> <!--(ngSubmit)="onUpdate()" novalidate #f="ngForm" -->
+            <form class="form">
 
                 <div class="form-group">
 
-                    <label for="person">Persona</label>
-
+                    <label for="person"><i class="bi bi-person-plus"></i>&nbsp; Persona</label>
+                    &nbsp;
                     <select id="person" name="person" [(ngModel)]="selectedPerson" required (change)="isActive()">
 
-                        <option *ngFor="let person of persons" value="{{ person.id }}">{{ person.firstName }} {{
-                            person.lastName }}</option>
+                        <option *ngFor="let person of persons" value="{{ person.id }}">{{ person.firstName }} {{ person.lastName }}</option>
 
                     </select>
 
@@ -25,10 +24,8 @@
 
                 <div class="form-group">
 
-                    <label for="company">Empresa</label>
-
-                    <!-- TODO: que se inicialize con el valor del registro -->
-
+                    <label for="company"><i class="bi bi-building-fill-add"></i>&nbsp; Empresa</label>
+                    &nbsp;
                     <select id="company" name="company" [(ngModel)]="selectedCompany" required>
 
                         <option *ngFor="let company of companies" value="{{ company.id }}">{{ company.companyName }}
@@ -42,8 +39,8 @@
 
                 <div class="form-group">
 
-                    <label for="product">Producto</label>
-
+                    <label for="product"><i class="bi bi-bag-heart-fill"></i>&nbsp;Producto</label>
+                    &nbsp;
                     <select id="product" name="product" [(ngModel)]="selectedProduct" required>
 
                         <option *ngFor="let product of products" value="{{ product.id }}">{{ product.name }}</option>
@@ -57,7 +54,7 @@
                 <div class="form-group">
 
                     <label for="quantity">Cantidad</label>
-
+                    
                     <input type="number" class="form-control" id="quantity" name="quantity" [(ngModel)]="quantity"
                         required>
 
@@ -66,25 +63,11 @@
                 <div class="form-group">
 
                     <label for="warranty">Garantía</label>
-
+                    
                     <input type="number" class="form-control" id="warranty" name="warranty" [(ngModel)]="warranty"
                         required>
 
                 </div>
-
-
-
-                        <!--<div class="form-group">
-
-                    <label for="tax">Impuesto</label>
-
-                    <select id="tax" name="tax" [(ngModel)]="selectedTax" required>
-
-                    <option *ngFor="let tax of taxes" value="{{ tax.name }}">{{ tax.name }} ({{ tax.aliquot }}%)</option>
-
-                    </select>
-
-                    </div>-->
 
                 <br>
 
@@ -95,8 +78,8 @@
 
                 <div class="form-group">
 
-                    <label for="service">Servicio</label>
-                    
+                    <label for="service"><i class="bi bi-globe2"></i>&nbsp;Servicio</label>
+                    &nbsp;
                     <select id="service" name="service" [(ngModel)]="selectedService" required>
 
                         <option *ngFor="let service of services" value="{{ service.id }}">{{ service.name }}</option>
@@ -113,28 +96,12 @@
                 <div class="d-grid gap-2 d-md-block">
 
                     <button class="btn btn-primary" (click)="save()">Aceptar</button>
-
+                    &nbsp;
                     <button class="btn btn-danger" (click)="out()">Cancelar</button> <!--me da error 500 -->
-
+                    
                 </div>
-
-                <!--<div>
-                    selected person {{ selectedPerson }}
-                    <br />
-                    warranty {{ warranty }}
-                    <br />
-                    quantity {{ quantity }}
-                    <br />
-                    selected product {{ selectedProduct }}
-                    <br />
-                    added products {{ addedProducts | json }}
-                    <br />
-                    selected company {{ selectedCompany }}
-                    <br />
-                    added services {{ addedServices | json }}
-                </div>-->
-
-                <table class="table" *ngIf="addedProducts.length > 0">
+                <br>
+                <table class="table table-dark table-hover" *ngIf="addedProducts.length > 0">
                     <thead>
                         <th scope="col">NOMBRE</th>
                         <th scope="col">CANTIDAD</th>
@@ -157,7 +124,7 @@
                                 {{ addedProduct.taxes.length < 1 ? 'No' : '' }}
                             </td>
                             <td>${{ addedProduct.unitPrice * addedProduct.quantity }}</td>
-                            <td>{{addedProduct.discount}}</td>
+                            <td>{{addedProduct.discount ? addedProduct.discount : 'No'}}</td>
                             <td>${{ addedProduct.total }}</td>
                             <td>
                                 <button type="button" class="btn btn-danger" (click)="removeProduct(addedProduct.id)">X</button>
@@ -166,7 +133,7 @@
                     </tbody>
                 </table>
 
-                <table class="table" *ngIf="addedServices.length > 0">
+                <table class="table table-dark table-hover" *ngIf="addedServices.length > 0">
                     <thead>
                         <th scope="col">NOMBRE</th>
                         <th scope="col">SOPORTE</th>
@@ -178,7 +145,7 @@
                     <tbody>
                         <tr *ngFor="let addedService of addedServices">
                             <td>{{ addedService.name }}</td>
-                            <td>{{ addedService.supportPrice }}</td>
+                            <td>{{ addedService.supportPrice ? addedService.supportPrice : 'No'}}</td>
                             <td>{{ addedService.price }}</td>
                             <td>
                                 <p *ngFor="let tax of addedService.taxes">{{ tax.name }}: ${{ tax.value }}</p>
@@ -193,10 +160,10 @@
                     </tbody>
                 </table>
 
-                total pedido: ${{ totalProducts + totalServices }}
+                <p style="color: rgb(156, 233, 137);"> PEDIDO TOTAL: ${{ totalProducts + totalServices }} </p>
 
             </form>
         </div>
     </div>
 </div>
-           
+          

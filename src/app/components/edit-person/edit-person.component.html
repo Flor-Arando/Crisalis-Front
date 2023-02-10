@@ -8,12 +8,14 @@
             <form (ngSubmit)="onUpdate()" novalidate #f="ngForm">
                 <div class="form-group">
                     <label for="nombreE">Nombre</label>
-                    <input type="text" class="form-control" id="firstName" name="firstName" [(ngModel)]="persona.firstName" required>
+                    <input type="text" class="form-control" id="firstName" name="firstName"
+                        [(ngModel)]="persona.firstName" required>
                 </div>
                 <br>
                 <div class="form-group">
                     <label for="nombreE">Apellido</label>
-                    <input type="text" class="form-control" id="lastName" name="lastName" [(ngModel)]="persona.lastName" required>
+                    <input type="text" class="form-control" id="lastName" name="lastName" [(ngModel)]="persona.lastName"
+                        required>
                 </div>
                 <br>
                 <div class="form-group">
@@ -23,6 +25,7 @@
                 <br>
                 <div class="d-grid gap-2 d-md-block">
                     <button class="btn btn-primary">Actualizar</button>
+                    &nbsp;
                     <button class="btn btn-danger">Cancelar</button>
                 </div>
             </form>
